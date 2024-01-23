@@ -8,6 +8,7 @@
     "vue3-common-page"
   ],
   "main": "lib/index.mjs",
+  "homepage": "https://github.com/xiaochen9506/vex-page",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
