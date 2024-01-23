@@ -24,7 +24,6 @@ app.use(VexPage)
 ```
 
 ```vue
-
 <template>
   <v-page
     :columns="columns"
@@ -36,73 +35,123 @@ app.use(VexPage)
 </template>
 
 <script setup>
-  // 获取列表
-  const getList = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          data: [
-            {
-              id: 1,
-              name: '张三',
-              age: 18,
-              address: '上海市普陀区金沙江路 1518 弄',
-            },
-            {
-              id: 2,
-              name: '李四',
-              age: 19,
-              address: '上海市普陀区金沙江路 1517 弄',
-            },
-            {
-              id: 3,
-              name: '王五',
-              age: 20,
-              address: '上海市普陀区金沙江路 1519 弄',
-            },
-          ],
-          total: 3,
-        })
-      }, 1000)
-    })
-  }
+import avatar from './avatar.js'
 
-  // 表格配置
-  const columns = [
-    { label: '姓名', prop: 'name', },
-    { label: '年龄', prop: 'age', },
-    { label: '地址', prop: 'address', },
-    // 操作列
-    {
-      label: '操作',
-      fixed: 'right',
-      width: 200,
-      scope: 'btn',
-      options: [
-        { text: 'test', event: 'test' }
-      ]
-    },
-  ]
+// 获取列表
+const getList = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        data: [
+          {
+            id: 1,
+            avatar,
+            name: '张三',
+            age: 18,
+            gender: 0,
+            select: 0,
+            number: 5000,
+            table: [
+              {
+                id: 1,
+                name: '张三',
+                age: 18,
+                gender: 0,
+                select: 0,
+                number: 5000,
+              }
+            ]
+          },
+          {
+            id: 2,
+            avatar,
+            name: '李四',
+            age: 19,
+            gender: 1,
+            select: 0,
+            number: 25000,
+            table: [
+              {
+                id: 2,
+                name: '李四',
+                age: 19,
+                gender: 1,
+                select: 0,
+                number: 25000,
+              }
+            ]
+          },
+        ],
+        total: 3,
+      })
+    }, 1000)
+  })
+}
 
-  const test = (row) => {
-    console.log(row)
-  }
+const gender = [
+  { label: '男', value: 0, type: 'primary' },
+  { label: '女', value: 1, type: 'success' },
+]
 
-  const showAdd = () => {
-  }
+const select = [
+  { label: '0', value: 0, type: 'primary' },
+  { label: '1', value: 1, type: 'success' },
+]
 
-  const filters = [
-    { label: '姓名', prop: 'name', type: 'input' },
-    { label: '性别', prop: 'sex', type: 'select', options: [{ label: 1, value: 1 }] },
-  ]
+const change = (row, value) => {
+  console.log(row, value)
+}
 
-  // 按钮
-  const btns = [
-    {
-      text: '新增',
-      click: showAdd
-    },
-  ]
+// 表格配置
+const columns = [
+  { label: '姓名', prop: 'name', },
+  { label: '头像', prop: 'avatar', scope: 'img', width: 100 },
+  { label: 'number', prop: 'number', scope: 'number-col' },
+  { label: 'input', prop: 'age', scope: 'input', change },
+  { label: 'select', prop: 'select', scope: 'select', options: select },
+  { label: '性别', prop: 'gender', scope: 'tag', options: gender },
+
+  // { label: '嵌套', prop: 'table', scope: 'table',
+  //   options: [
+  //     { label: '姓名', prop: 'name', },
+  //     { label: 'number', prop: 'number', scope: 'number-col' },
+  //     { label: 'input', prop: 'age', scope: 'input', change },
+  //     { label: 'select', prop: 'select', scope: 'select', options: select },
+  //     { label: '性别', prop: 'gender', scope: 'tag', options: gender },
+  //   ]
+  // },
+
+  // 操作列
+  {
+    label: '操作',
+    fixed: 'right',
+    width: 200,
+    scope: 'btn',
+    options: [
+      { text: 'test', event: 'test' }
+    ]
+  },
+]
+
+const test = (row) => {
+  console.log(row)
+}
+
+const showAdd = () => {
+}
+
+const filters = [
+  { label: '姓名', prop: 'name', type: 'input' },
+  { label: '性别', prop: 'gender', type: 'select', options: gender },
+]
+
+// 按钮
+const btns = [
+  {
+    text: '新增',
+    click: showAdd
+  },
+]
 </script>
 ```
 
@@ -110,4 +159,13 @@ app.use(VexPage)
 
 ![image](./public/img.png)
 
+## table 支持scope类型
+
+- img 图片
+- number-col 数字
+- input 输入框
+- select 下拉框
+- tag 标签
+- table 表格
+- btn 按钮
 

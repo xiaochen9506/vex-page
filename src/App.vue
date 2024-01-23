@@ -9,6 +9,8 @@
 </template>
 
 <script setup>
+import avatar from './avatar.js'
+
 // 获取列表
 const getList = () => {
   return new Promise((resolve) => {
@@ -17,21 +19,41 @@ const getList = () => {
         data: [
           {
             id: 1,
+            avatar,
             name: '张三',
             age: 18,
-            address: '上海市普陀区金沙江路 1518 弄',
+            gender: 0,
+            select: 0,
+            number: 5000,
+            table: [
+              {
+                id: 1,
+                name: '张三',
+                age: 18,
+                gender: 0,
+                select: 0,
+                number: 5000,
+              }
+            ]
           },
           {
             id: 2,
+            avatar,
             name: '李四',
             age: 19,
-            address: '上海市普陀区金沙江路 1517 弄',
-          },
-          {
-            id: 3,
-            name: '王五',
-            age: 20,
-            address: '上海市普陀区金沙江路 1519 弄',
+            gender: 1,
+            select: 0,
+            number: 25000,
+            table: [
+              {
+                id: 2,
+                name: '李四',
+                age: 19,
+                gender: 1,
+                select: 0,
+                number: 25000,
+              }
+            ]
           },
         ],
         total: 3,
@@ -40,11 +62,39 @@ const getList = () => {
   })
 }
 
+const gender = [
+  { label: '男', value: 0, type: 'primary' },
+  { label: '女', value: 1, type: 'success' },
+]
+
+const select = [
+  { label: '0', value: 0, type: 'primary' },
+  { label: '1', value: 1, type: 'success' },
+]
+
+const change = (row, value) => {
+  console.log(row, value)
+}
+
 // 表格配置
 const columns = [
   { label: '姓名', prop: 'name', },
-  { label: '年龄', prop: 'age', },
-  { label: '地址', prop: 'address', },
+  { label: '头像', prop: 'avatar', scope: 'img', width: 100 },
+  { label: 'number', prop: 'number', scope: 'number-col' },
+  { label: 'input', prop: 'age', scope: 'input', change },
+  { label: 'select', prop: 'select', scope: 'select', options: select },
+  { label: '性别', prop: 'gender', scope: 'tag', options: gender },
+
+  // { label: '嵌套', prop: 'table', scope: 'table',
+  //   options: [
+  //     { label: '姓名', prop: 'name', },
+  //     { label: 'number', prop: 'number', scope: 'number-col' },
+  //     { label: 'input', prop: 'age', scope: 'input', change },
+  //     { label: 'select', prop: 'select', scope: 'select', options: select },
+  //     { label: '性别', prop: 'gender', scope: 'tag', options: gender },
+  //   ]
+  // },
+
   // 操作列
   {
     label: '操作',
@@ -66,7 +116,7 @@ const showAdd = () => {
 
 const filters = [
   { label: '姓名', prop: 'name', type: 'input' },
-  { label: '性别', prop: 'sex', type: 'select', options: [{ label: 1, value: 1 }] },
+  { label: '性别', prop: 'gender', type: 'select', options: gender },
 ]
 
 // 按钮

@@ -1,5 +1,5 @@
 <template>
-  <div class="c-table" :class="{ pd: onAdd }">
+  <div class="v-table" :class="{ pd: onAdd }">
     <el-table
       ref="tableRef"
       border
@@ -13,7 +13,13 @@
         :fixed="item.fixed"
       >
         <template #default="{ row }">
-          <VElement v-if="item.scope !== 'btn'" :row="row" :col="item" />
+          <VElement v-if="!['btn', 'table'].includes(item.scope)" :row="row" :col="item" />
+
+          <v-table
+            v-if="item.scope === 'table'"
+            :data="row[item.prop]"
+            :columns="item.options"
+          />
 
           <div
             v-else
@@ -39,7 +45,7 @@
 <script setup>
 import { ElTable, ElTableColumn, ElButton } from 'element-plus'
 import { defineProps, ref, onMounted, nextTick, onUnmounted, defineExpose, defineEmits, getCurrentInstance } from 'vue'
-import VElement from '../v-page/v-element.vue'
+import VElement from '../v-element/v-element.vue'
 import { copy } from '../utils/index'
 
 const props = defineProps({
@@ -170,18 +176,10 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.c-table {
+.v-table {
   position: relative;
   &.pd {
     padding-bottom: 20px;
-  }
-
-  :deep(.vxe-body--column) {
-    &:hover {
-      .copy-box {
-        display: flex;
-      }
-    }
   }
 
   .copy-box {
@@ -200,10 +198,6 @@ onUnmounted(() => {
     .el-icon-copy-document {
       color: #fff;
     }
-  }
-
-  :deep(.el-date-editor.el-input) {
-    width: 100%;
   }
 
   .add-btn {
@@ -237,25 +231,6 @@ onUnmounted(() => {
       width: 10px;
       height: 2px;
       background: #fff;
-    }
-  }
-
-  .operator-btn {
-    position: relative;
-
-    &.popover-btn {
-      margin-right: 10px;
-    }
-
-    input {
-      position: absolute;
-      cursor: pointer;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1;
-      opacity: 0;
     }
   }
 }
