@@ -1,0 +1,38 @@
+{
+  "name": "vex-page",
+  "version": "1.0.5",
+  "description": "vue3 管理后台通用列表页面。Vue3 + Element Plus",
+  "author": "xiaochen9506",
+  "keywords": [
+    "vex-page",
+    "vue3-common-page"
+  ],
+  "main": "lib/index.mjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "element-plus": "^2.5.2",
+    "sortablejs": "^1.15.2",
+    "unplugin-icons": "^0.18.2",
+    "vue": "^3.3.11"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.3.3",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "prettier": "^3.0.3",
+    "sass": "^1.70.0",
+    "unplugin-auto-import": "^0.17.3",
+    "unplugin-vue-components": "^0.26.0",
+    "vite": "^5.0.10",
+    "vite-plugin-vue-setup-extend": "^0.4.0"
+  },
+  "license": "ISC"
+}
