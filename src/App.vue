@@ -63,12 +63,12 @@ const getList = () => {
 }
 
 const gender = [
-  { label: '男', value: 0, type: 'primary' },
+  { label: '男', value: 0, type: 'info' },
   { label: '女', value: 1, type: 'success' },
 ]
 
 const select = [
-  { label: '0', value: 0, type: 'primary' },
+  { label: '0', value: 0, type: 'info' },
   { label: '1', value: 1, type: 'success' },
 ]
 

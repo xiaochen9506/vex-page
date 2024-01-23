@@ -22,7 +22,7 @@
           />
 
           <div
-            v-else
+            v-if="item.scope === 'btn'"
             class="operator-btn"
             >
             <el-button
@@ -44,7 +44,7 @@
 
 <script setup>
 import { ElTable, ElTableColumn, ElButton } from 'element-plus'
-import { defineProps, ref, onMounted, nextTick, onUnmounted, defineExpose, defineEmits, getCurrentInstance } from 'vue'
+import { defineProps, ref, onMounted, nextTick, onUnmounted, defineExpose, getCurrentInstance } from 'vue'
 import VElement from '../v-element/v-element.vue'
 import { copy } from '../utils/index'
 
