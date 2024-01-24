@@ -48,12 +48,16 @@ const getList = (params) => {
 
 ## 参数
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| columns | 表格列配置 | _Column[]_ | `[]` |
-| btns | 按钮配置 | _Btn[]_ | `[]` |
-| filter | 筛选配置 | _Filter[]_ | `[]` |
-| get-list | 获取列表方法 | _Function_ | - |
+| 参数         | 说明              | 类型         | 默认值  |
+|------------|-----------------|------------|------|
+| columns    | 表格列配置           | _Column[]_ | `[]` |
+| btns       | 按钮配置            | _Btn[]_    | `[]` |
+| filter     | 筛选配置            | _Filter[]_ | `[]` |
+| get-list   | 获取列表方法          | _Function_ | -    |
+| formatList | 格式化数据           | _Function_ | -    |
+| selection  | 表格多选回调, 配置后显示多选 | _Function_ | -    |
+| radio      | 表格单选回调, 配置后显示单选 | _Function_ | -    |
+
 
 
 ### Column
@@ -85,6 +89,10 @@ const getList = (params) => {
 
 ## 事件
 
+| 事件名  | 说明 | 参数 |
+|------| --- | --- |
+| search | 搜索 | query |
+
 如果 columns 配置 scope 为 btn，且配置如下:
 
     ```js
@@ -97,6 +105,15 @@ const getList = (params) => {
     ```
 
 那么在表格上点击test按钮，会触发test事件，事件参数为当前行数据。在`v-page`上监听test事件即可。
+
+## 方法
+
+| 方法名  | 说明   | 参数 |
+|------|------| --- |
+| refreshList | 刷新列表 | - |
+| clearSelection | 清空多选 | - |
+| clearRadio | 清空单选 | - |
+
 
 ## 内部实现
 

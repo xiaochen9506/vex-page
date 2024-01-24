@@ -4,7 +4,23 @@
       ref="tableRef"
       border
       :data="data"
+      @selection-change="selection"
+
+      :highlight-current-row="!!radio"
+      @current-change="radioChange"
     >
+      <el-table-column v-if="selection" type="selection" width="40" />
+
+      <el-table-column v-if="radio" fixed="left" width="60">
+        <template #header>
+          <div class="radio-header" @click="clearRadio">取消</div>
+        </template>
+        <template #default="{ row }">
+          <el-radio v-model="radioValue" :label="row.id" />
+        </template>
+      </el-table-column>
+
+
       <el-table-column
         v-for="item in columns"
         :key="item.prop"
@@ -44,7 +60,7 @@
 </template>
 
 <script setup>
-import { ElTable, ElTableColumn, ElButton } from 'element-plus'
+import { ElTable, ElTableColumn, ElButton, ElRadio } from 'element-plus'
 import { defineProps, ref, onMounted, nextTick, onUnmounted, defineExpose, getCurrentInstance } from 'vue'
 import VElement from '../v-element/v-element.vue'
 import { copy } from '../utils/index'
@@ -60,24 +76,13 @@ const props = defineProps({
   selection: {
     type: Function
   },
+  radio: {
+    type: Function,
+  },
+
+  // todo: 暂未实现
   onAdd: {
     type: Function
-  },
-  showFilter: {
-    type: Boolean,
-    default: true
-  },
-  showOverflow: {
-    type: [Boolean, String],
-    default: 'ellipsis'
-  },
-  width: {
-    type: String,
-    default: ''
-  },
-  radio: {
-    type: Boolean,
-    default: false
   },
   onSize: {
     type: Boolean,
@@ -89,27 +94,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  footerMethod: {
-    type: Function,
-    default: null
-  },
-  mergeCells: {
-    type: Array,
-    default: () => ([]),
-  },
-  // 根据内容自动设置列宽
-  resetColumnWidth: {
-    type: Boolean,
-    default: false
-  },
-  // 设置最小宽度
-  setMinWidth: {
-    type: Boolean,
-    default: true
-  },
-  columnMinWidth: {
-    type: [Number, String],
-  }
 })
 
 const { proxy } = getCurrentInstance()
@@ -117,6 +101,7 @@ const { proxy } = getCurrentInstance()
 const radioValue = ref(null)
 const autoMaxHeight = ref(null)
 const tableRef = ref(null)
+
 
 const copyTxt = (row, column) => {
   const { scope, prop, render } = column
@@ -145,6 +130,13 @@ const clearSelection = () => {
 
 const clearRadio = () => {
   tableRef.value.setCurrentRow()
+}
+
+const radioChange = (e) => {
+  radioValue.value = e ? e.id : null
+  if (props.radio) {
+    props.radio(e)
+  }
 }
 
 const btnClick = (btn, row) => {
@@ -233,6 +225,14 @@ onUnmounted(() => {
       height: 2px;
       background: #fff;
     }
+  }
+
+  .radio-header {
+    cursor: pointer;
+  }
+
+  :deep(.el-radio__label) {
+    display: none;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="c-page" :class="{ pd: onAdd }">
+  <div class="v-page" :class="{ pd: onAdd }">
     <VFilter
       v-if="filter.length> 0"
       ref="filter"
@@ -11,7 +11,7 @@
       @search="handleSearch"
     />
 
-    <div class="operator">
+    <div class="v-page-operator">
       <el-button
         v-for="(item, i) in btns"
         :key="i"
@@ -24,20 +24,17 @@
       <slot name="btn" />
     </div>
 
-    <div class="table-container">
+    <div class="v-page-table">
       <VTable
         ref="tableRef"
         v-loading="loading"
-        sortable
         :data="list"
         :columns="columns"
         :selection="selection"
-        :on-add="onAdd"
         :radio="radio"
-        :on-size="!tableHeight"
-        :max-height="tableHeight"
+
+        :on-add="onAdd"
         @btnClick="btnClick"
-        @radioInput="radioInput"
       />
     </div>
     <c-pagination
@@ -71,10 +68,9 @@ const props = defineProps({
   },
   // 表格单选
   radio: {
-    type: Boolean,
-    default: false
+    type: Function,
   },
-  // 表格选择回调
+  // 表格多选回调
   selection: {
     type: Function
   },
@@ -100,9 +96,6 @@ const props = defineProps({
   filterLabelWidth: {
     type: String
   },
-  onSearch: {
-    type: Function
-  },
   // 按钮配置
   btns: {
     type: Array,
@@ -117,6 +110,10 @@ const props = defineProps({
     type: Function,
     default: null
   },
+
+
+  // todo: 暂未实现
+
   // 拖拽表头
   sortable: {
     type: Boolean,
@@ -138,10 +135,6 @@ const pagination = ref({})
 const filterModel = ref({})
 const col = ref(4)
 const tableRef = ref(null)
-
-const radioInput = (e) => {
-  proxy.$emit('radioInput', e)
-}
 
 const clearRadio = () => {
   tableRef.value.clearRadio()
@@ -179,7 +172,6 @@ const fetchList = async (query) => {
 }
 
 const handlePagination = (pagination) => {
-  console.log(pagination)
   clearSelection()
   clearRadio()
   pagination.value = pagination
@@ -199,15 +191,16 @@ const refreshList = async () => {
 }
 
 const handleSearch = (modal) => {
-  console.log(modal)
   pagination.value.page = 1
   filterModel.value = modal
   refreshList()
-  props.onSearch && props.onSearch(modal)
+  proxy.$emit('search', modal)
 }
 
 defineExpose({
-  refreshList
+  refreshList,
+  clearSelection,
+  clearRadio,
 })
 
 onMounted(() => {
@@ -216,17 +209,17 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.c-page {
+.v-page {
   position: relative;
   &.pd {
     padding-bottom: 20px;
   }
 
-  .operator {
+  .v-page-operator {
     padding: 10px;
   }
 
-  .table-container
+  .v-page-table
   {
     padding: 0 10px;
   }

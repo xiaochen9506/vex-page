@@ -1,14 +1,17 @@
 <template>
   <v-page
+    ref="pageRef"
     :columns="columns"
     :btns="btns"
     :filter="filters"
     :get-list="getList"
+    :radio="selection"
     @test="test"
   />
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import avatar from './avatar.js'
 
 // 获取列表
@@ -62,6 +65,8 @@ const getList = () => {
   })
 }
 
+const pageRef = ref(null)
+
 const gender = [
   { label: '男', value: 0, type: 'info' },
   { label: '女', value: 1, type: 'success' },
@@ -74,6 +79,10 @@ const select = [
 
 const change = (row, value) => {
   console.log(row, value)
+}
+
+const selection = (e) => {
+  console.log(e)
 }
 
 // 表格配置
@@ -107,11 +116,8 @@ const columns = [
   },
 ]
 
-const test = (row) => {
-  console.log(row)
-}
-
-const showAdd = () => {
+const test = () => {
+  pageRef.value.clearRadio()
 }
 
 const filters = [
@@ -122,8 +128,8 @@ const filters = [
 // 按钮
 const btns = [
   {
-    text: '新增',
-    click: showAdd
+    text: '测试',
+    click: test
   },
 ]
 </script>
