@@ -9,8 +9,9 @@
         v-for="item in columns"
         :key="item.prop"
         :width="item.width"
-        :label="item.label"
-        :fixed="item.fixed"
+        v-bind="{
+          ...item
+        }"
       >
         <template #default="{ row }">
           <VElement v-if="!['btn', 'table'].includes(item.scope)" :row="row" :col="item" />

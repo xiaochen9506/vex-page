@@ -159,6 +159,13 @@ const btns = [
 
 ![image](./public/img.png)
 
+## 组件
+
+- [V-Page](v-page/doc.md)
+- [V-Table](v-table/doc.md)
+- [V-Element](v-element/doc.md)
+- [V-Filter](v-filter/doc.md)
+
 ## table 支持scope类型
 
 - img 图片

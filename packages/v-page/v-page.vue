@@ -5,10 +5,10 @@
       ref="filter"
       :filter="filter"
       :filter-config="filterConfig"
-      :search="handleSearch"
       :label-width="filterLabelWidth"
       :btns="filterBtns"
       :col="col"
+      @search="handleSearch"
     />
 
     <div class="operator">
@@ -52,8 +52,8 @@
 <script setup>
 import { defineProps, getCurrentInstance, ref, onMounted, defineExpose } from 'vue'
 
-import VFilter from '../v-filter/index.vue'
-import cPagination from './c-pagination.vue'
+import VFilter from '../v-filter/v-filter.vue'
+import cPagination from '../v-pagination/v-pagination.vue'
 import VTable from '../v-table/v-table.vue'
 import { GET_LIST, GET_TOTAL, PAGE_NUM_KEY, PAGE_SIZE_KEY } from '../config'
 
@@ -199,6 +199,7 @@ const refreshList = async () => {
 }
 
 const handleSearch = (modal) => {
+  console.log(modal)
   pagination.value.page = 1
   filterModel.value = modal
   refreshList()

@@ -2,10 +2,9 @@
   <el-form
     ref="filterForm"
     inline
-
     :model="form"
     :label-width="labelWidth"
-    class="c-filter"
+    class="v-filter"
   >
     <el-form-item
       v-for="(item) in list"
@@ -70,20 +69,22 @@
       />
     </el-form-item>
     <el-form-item label=" ">
-      <el-button type="primary" :icon="Search" @click="doSearch">搜索</el-button>
+      <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
       <el-button :icon="Refresh" @click="reset">重置</el-button>
-      <el-button v-for="item in btns" :key="item.label" @click="item.click">{{ item.label }}</el-button>
+      <el-button v-for="item in btns" :key="item.text" @click="item.click">{{ item.text }}</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script setup>
-import { defineProps, ref, watch, onMounted } from 'vue'
+import { defineProps, ref, watch, onMounted, getCurrentInstance } from 'vue'
 import { ElForm, ElFormItem, ElInput, ElSelect, ElOption, ElDatePicker, ElRow, ElCol, ElCascader, ElButton } from 'element-plus'
 import {
   Search,
   Refresh,
 } from '@element-plus/icons-vue'
+
+const { proxy } = getCurrentInstance()
 
 const props = defineProps({
   filter: {
@@ -98,10 +99,6 @@ const props = defineProps({
   filterConfig: {
     type: Object,
     default: () => ({})
-  },
-  search: {
-    type: Function,
-    default: () => {}
   },
   labelWidth: {
     type: String,
@@ -151,7 +148,7 @@ const dateChange = (e, item) => {
   }
 }
 
-const doSearch = () => {
+const search = () => {
   const params = {}
   list.value.forEach(item => {
     const key = item.filterProp || item.prop
@@ -162,16 +159,17 @@ const doSearch = () => {
       params[key] = form.value[item.prop]
     }
 
-    if (item.formatValue) {
-      params[key] = item.formatValue(form.value[item.prop])
+    if (item.format && typeof item.format === 'function') {
+      params[key] = item.format(form.value[item.prop])
     }
   })
-  props.search(params)
+  proxy.$emit('search', params)
 }
 
 const reset = () => {
   clear()
-  props.search({})
+  proxy.$emit('search', {})
+  proxy.$emit('reset')
 }
 
 onMounted(() => {
@@ -180,7 +178,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.c-filter {
+.v-filter {
   background: #fff;
   border-bottom: 5px solid #f2f2f2;
   display: flex;
