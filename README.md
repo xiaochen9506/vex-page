@@ -161,10 +161,10 @@ const btns = [
 
 ## 组件
 
-- [V-Page](v-page/doc.md)
-- [V-Table](v-table/doc.md)
-- [V-Element](v-element/doc.md)
-- [V-Filter](v-filter/doc.md)
+- [V-Page](./packages/v-page/doc.md)
+- [V-Table](./packages/v-table/doc.md)
+- [V-Element](./packages/v-element/doc.md)
+- [V-Filter](./packages/v-filter/doc.md)
 
 ## table 支持scope类型
 
