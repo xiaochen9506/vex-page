@@ -4,8 +4,10 @@ export let PAGE_SIZE_KEY = 'pageSize'
 // 分页num key
 export let PAGE_NUM_KEY = 'pageNum'
 
+// 获取列表
 export let GET_LIST = (res) => res.data
 
+// 获取总数
 export let GET_TOTAL = res => res.total
 
 export const setConfig = (params = {}) => {

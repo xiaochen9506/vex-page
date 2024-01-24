@@ -159,6 +159,17 @@ const btns = [
 
 ![image](./public/img.png)
 
+## setConfig
+
+设置全局配置, 主要是分页时候参数以及获取方法
+
+| 参数          | 说明     | 类型         | 默认值          |
+|-------------|--------|------------|--------------|
+| pageSizeKey | 分页参数   | _string_ | `pageSize`   |
+| pageNumKey  | 分页参数   | _string_    | `pageNum`    |
+| getList     | 获取列表方法 | _Function_ | `res => res.data` |
+| getTotal    | 获取总数方法 | _Function_ | `res => res.data` |
+
 ## 组件
 
 - [V-Page](./packages/v-page/doc.md)
