@@ -29,7 +29,7 @@
           ...item
         }"
       >
-        <template #default="{ row }">
+        <template #default="{ row, $index }">
           <VElement v-if="!['btn', 'table'].includes(item.scope)" :row="row" :col="item" />
 
           <v-table
@@ -47,7 +47,7 @@
               :key="btn.event"
               :type="btn.type || 'primary'"
               text
-              @click="btnClick(btn, row)"
+              @click="btnClick(btn, row, $index)"
             >
               {{ btn.text }}
             </el-button>
@@ -139,11 +139,12 @@ const radioChange = (e) => {
   }
 }
 
-const btnClick = (btn, row) => {
-  proxy.$emit(btn.event, row)
+const btnClick = (btn, row, index) => {
+  proxy.$emit(btn.event, row, index)
   proxy.$emit('btnClick', {
     btn,
     row,
+    index,
   })
 }
 
@@ -171,6 +172,8 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .v-table {
   position: relative;
+  width: 100%;
+
   &.pd {
     padding-bottom: 20px;
   }
@@ -233,6 +236,10 @@ onUnmounted(() => {
 
   :deep(.el-radio__label) {
     display: none;
+  }
+
+  :deep(.el-input-number) {
+    width: 100%;
   }
 }
 </style>

@@ -116,8 +116,8 @@ const columns = [
   },
 ]
 
-const test = () => {
-  pageRef.value.clearRadio()
+const test = (row, index) => {
+  console.log(row, index)
 }
 
 const filters = [

@@ -9,15 +9,28 @@
 
   <el-input
     v-if="col.scope === 'input'"
+    v-bind="{
+      ...col
+    }"
     v-model="value"
-    :placeholder="col.placeholder"
+    @change="change"
+  />
+
+  <el-input-number
+    v-if="col.scope === 'input-number'"
+    v-bind="{
+      ...col
+    }"
+    v-model="value"
     @change="change"
   />
 
   <el-select
     v-if="col.scope === 'select'"
+    v-bind="{
+      ...col
+    }"
     v-model="value"
-    :placeholder="col.placeholder"
     @change="change"
   >
     <el-option
