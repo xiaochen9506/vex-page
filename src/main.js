@@ -2,6 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import VexPage, { setConfig } from '../packages/index' //导入
 import router from './router'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 
 
 // 设置
@@ -13,5 +16,6 @@ setConfig({
 
 const app = createApp(App)
 app.use(VexPage) //注册
+app.use(ElementPlus)
 app.use(router)
 app.mount('#app')
