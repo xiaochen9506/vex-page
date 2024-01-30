@@ -1,7 +1,7 @@
 <template>
   <div class="v-page" :class="{ pd: onAdd }">
     <VFilter
-      v-if="filter.length> 0"
+      v-if="filter"
       ref="filter"
       :filter="filter"
       :filter-config="filterConfig"
@@ -39,7 +39,7 @@
     </div>
     <c-pagination
       v-if="showPagination"
-      :page="pagination.page"
+      :page="pagination.pageNum"
       :total="total"
       @pagination="handlePagination"
     />
@@ -156,6 +156,7 @@ const fetchList = async (query) => {
     [PAGE_SIZE_KEY]: pagination.value.pageSize || 10,
     ...query,
   }
+  console.log(query)
   // 默认第一页
   const res = await props.getList(params.value)
   let data = GET_LIST(res)
@@ -171,12 +172,12 @@ const fetchList = async (query) => {
   loading.value = false
 }
 
-const handlePagination = (pagination) => {
+const handlePagination = (p) => {
+  pagination.value = p
   clearSelection()
   clearRadio()
-  pagination.value = pagination
   fetchList({
-    ...pagination,
+    ...p,
     ...filterModel.value
   })
 }
@@ -191,7 +192,7 @@ const refreshList = async () => {
 }
 
 const handleSearch = (modal) => {
-  pagination.value.page = 1
+  pagination.value.pageNum = 1
   filterModel.value = modal
   refreshList()
   proxy.$emit('search', modal)

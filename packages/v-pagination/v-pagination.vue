@@ -1,7 +1,7 @@
 <template>
   <div :class="{hidden}" class="pagination-container">
     <el-pagination
-      v-model:current-page="currentPage"
+      :current-page="currentPage"
       :layout="layout"
       v-bind="$attrs"
       @size-change="handleSizeChange"
@@ -39,10 +39,12 @@ const currentPage = ref(props.page || 1)
 const { proxy } = getCurrentInstance()
 
 watch(() => props.page, (v) => {
+  console.log(v)
   currentPage.value = v
 });
 
 const handleSizeChange = (val) => {
+  console.log('size change')
   if (currentPage.value * val > props.total) {
     currentPage.value = 1
   }
@@ -54,6 +56,7 @@ const handleSizeChange = (val) => {
 }
 
 const handleCurrentChange = (val) => {
+  console.log('page change')
   currentPage.value = val
   proxy.$emit('pagination', { pageNum: val, pageSize: pageSize.value })
   if (props.autoScroll) {

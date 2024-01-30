@@ -59,7 +59,7 @@ const getList = () => {
             ]
           },
         ],
-        total: 3,
+        total: 30,
       })
     }, 1000)
   })
