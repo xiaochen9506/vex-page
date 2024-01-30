@@ -1,5 +1,5 @@
 <template>
-  <div class="v-page" :class="{ pd: onAdd }">
+  <div class="v-page" :class="{ pd: props.table && props.table.onAdd }">
     <VFilter
       v-if="filter"
       ref="filter"
@@ -32,8 +32,9 @@
         :columns="columns"
         :selection="selection"
         :radio="radio"
-
-        :on-add="onAdd"
+        v-bind="{
+          ...props.table,
+        }"
         @btnClick="btnClick"
       />
     </div>
@@ -109,19 +110,10 @@ const props = defineProps({
     type: Function,
     default: null
   },
-
-
-  // todo: 暂未实现
-
-  // 拖拽表头
-  sortable: {
-    type: Boolean,
-    default: true
-  },
-  // 表格高度
-  tableHeight: {
-    type: [String, Number],
-    default: null
+  // 表格属性，透传下去
+  table: {
+    type: Object,
+    default: () => ({})
   },
 })
 

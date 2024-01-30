@@ -6,6 +6,10 @@
     :filter="filters"
     :get-list="getList"
     :radio="selection"
+    :table="{
+      onAdd: () => {},
+      stripe: true,
+    }"
     @test="test"
   />
 </template>
@@ -37,7 +41,8 @@ const getList = () => {
                 select: 0,
                 number: 5000,
               }
-            ]
+            ],
+            btn: true
           },
           {
             id: 2,
@@ -56,7 +61,8 @@ const getList = () => {
                 select: 0,
                 number: 25000,
               }
-            ]
+            ],
+            btn: false
           },
         ],
         total: 30,
@@ -111,7 +117,7 @@ const columns = [
     width: 200,
     scope: 'btn',
     options: [
-      { text: 'test', event: 'test' }
+      { text: 'test', event: 'test', if: 'btn' }
     ]
   },
 ]

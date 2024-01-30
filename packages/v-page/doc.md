@@ -48,15 +48,16 @@ const getList = (params) => {
 
 ## 参数
 
-| 参数         | 说明              | 类型         | 默认值  |
-|------------|-----------------|------------|------|
-| columns    | 表格列配置           | _Column[]_ | `[]` |
-| btns       | 按钮配置            | _Btn[]_    | `[]` |
-| filter     | 筛选配置            | _Filter[]_ | `[]` |
-| get-list   | 获取列表方法          | _Function_ | -    |
-| formatList | 格式化数据           | _Function_ | -    |
-| selection  | 表格多选回调, 配置后显示多选 | _Function_ | -    |
-| radio      | 表格单选回调, 配置后显示单选 | _Function_ | -    |
+| 参数         | 说明                  | 类型         | 默认值 |
+|------------|---------------------|------------|-----|
+| columns    | 表格列配置               | _Column[]_ | -   |
+| btns       | 按钮配置                | _Btn[]_    | -   |
+| filter     | 筛选配置                | _Filter[]_ | -   |
+| get-list   | 获取列表方法              | _Function_ | -   |
+| formatList | 格式化数据               | _Function_ | -   |
+| selection  | 表格多选回调, 配置后显示多选     | _Function_ | -   |
+| radio      | 表格单选回调, 配置后显示单选     | _Function_ | -   |
+| table      | 以透传方式，想参数传给el-table | _Object_   | -   |
 
 
 

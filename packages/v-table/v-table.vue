@@ -3,9 +3,9 @@
     <el-table
       ref="tableRef"
       border
+      v-bind="$attrs"
       :data="data"
       @selection-change="selection"
-
       :highlight-current-row="!!radio"
       @current-change="radioChange"
     >
@@ -38,20 +38,24 @@
             :columns="item.options"
           />
 
-          <div
+          <template
             v-if="item.scope === 'btn'"
-            class="operator-btn"
             >
-            <el-button
-              v-for="btn in item.options || []"
-              :key="btn.event"
-              :type="btn.type || 'primary'"
-              text
-              @click="btnClick(btn, row, $index)"
-            >
-              {{ btn.text }}
-            </el-button>
-          </div>
+            <template v-for="btn in item.options || []" :key="btn.event">
+              <el-button
+                v-if="!btn.if || row[btn.if]"
+                :type="btn.type || 'primary'"
+                text
+                @click="btnClick(btn, row, $index)"
+                v-bind="{
+                  ...btn
+                }"
+              >
+                {{ btn.text || (btn.render ? btn.render(row, $index) : '') }}
+              </el-button>
+            </template>
+
+          </template>
         </template>
       </el-table-column>
     </el-table>
@@ -79,11 +83,10 @@ const props = defineProps({
   radio: {
     type: Function,
   },
-
-  // todo: 暂未实现
   onAdd: {
     type: Function
   },
+
   onSize: {
     type: Boolean,
     default: false
