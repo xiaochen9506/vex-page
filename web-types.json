@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json.schemastore.org/web-types",
+  "framework": "vue",
+  "version": "1.0.24",
+  "name": "vex-page",
+  "contributions": {
+    "html": {
+      "vue-components": [
+        {
+          "name": "v-page",
+          "source": {
+            "symbol": "VPage"
+          },
+          "description": "v-page",
+          "props": [
+            {
+              "name": "get-list",
+              "description": "获取列表数据",
+              "type": [
+                "Function"
+              ]
+            },
+            {
+              "name": "columns",
+              "description": "表格列配置",
+              "type": [
+                "Array"
+              ]
+            },
+            {
+              "name": "filter",
+              "description": "筛选条件",
+              "type": [
+                "Array"
+              ]
+            },
+            {
+              "name": "btns",
+              "description": "按钮配置",
+              "type": [
+                "Array"
+              ]
+            },
+            {
+              "name": "table",
+              "description": "表格配置",
+              "type": [
+                "Array"
+              ]
+            },
+            {
+              "name": "showPagination",
+              "description": "是否显示分页",
+              "type": [
+                "Boolean"
+              ]
+            },
+            {
+              "name": "radio",
+              "description": "单选回调",
+              "type": [
+                "Function"
+              ]
+            },
+            {
+              "name": "selection",
+              "description": "多选回调",
+              "type": [
+                "Function"
+              ]
+            },
+            {
+              "name": "formatList",
+              "description": "格式化列表数据",
+              "type": [
+                "Function"
+              ]
+            }
+          ],
+          "js": {
+            "events": [
+              {
+                "name": "search",
+                "description": "触发搜索方法"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+
