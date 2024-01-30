@@ -43,7 +43,7 @@
             >
             <template v-for="btn in item.options || []" :key="btn.event">
               <el-button
-                v-if="!btn.if || row[btn.if]"
+                v-if="!btn.if || (typeof btn.if === 'function' ? btn.if(row, $index) : row[btn.if])"
                 :type="btn.type || 'primary'"
                 text
                 @click="btnClick(btn, row, $index)"

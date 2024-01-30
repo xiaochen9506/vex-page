@@ -117,7 +117,7 @@ const columns = [
     width: 200,
     scope: 'btn',
     options: [
-      { text: 'test', event: 'test', if: 'btn' }
+      { text: 'test', event: 'test', if: row => row.btn }
     ]
   },
 ]
