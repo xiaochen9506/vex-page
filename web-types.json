@@ -85,6 +85,51 @@
               }
             ]
           }
+        },
+        {
+          "name": "v-table",
+          "source": {
+            "symbol": "VTable"
+          },
+          "description": "v-table",
+          "props": [
+            {
+              "name": "columns",
+              "description": "表格列配置",
+              "type": [
+                "Array"
+              ]
+            },
+            {
+              "name": "data",
+              "description": "数据源",
+              "type": [
+                "Array"
+              ]
+            },
+            {
+              "name": "radio",
+              "description": "单选回调",
+              "type": [
+                "Function"
+              ]
+            },
+            {
+              "name": "selection",
+              "description": "多选回调",
+              "type": [
+                "Function"
+              ]
+            }
+          ],
+          "js": {
+            "events": [
+              {
+                "name": "btnClick",
+                "description": "点击按钮事件"
+              }
+            ]
+          }
         }
       ]
     }
