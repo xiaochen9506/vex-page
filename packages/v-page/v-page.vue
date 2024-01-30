@@ -81,7 +81,6 @@ const props = defineProps({
   // 筛选配置
   filter: {
     type: Array,
-    default: () => ([])
   },
   filterBtns: {
     type: Array,
