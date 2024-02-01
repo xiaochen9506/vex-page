@@ -177,7 +177,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .v-filter {
   background: #fff;
   border-bottom: 5px solid #f2f2f2;

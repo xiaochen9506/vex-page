@@ -1,5 +1,5 @@
 <template>
-  <div :class="{hidden}" class="pagination-container">
+  <div :class="{hidden}" class="v-pagination">
     <el-pagination
       :current-page="currentPage"
       :layout="layout"
@@ -66,13 +66,14 @@ const handleCurrentChange = (val) => {
 
 </script>
 
-<style scoped>
-.pagination-container {
+<style lang="scss">
+.v-pagination {
   margin-top: 10px;
   display: flex;
   justify-content: flex-end;
-}
-.pagination-container.hidden {
-  display: none;
+
+  &.hidden {
+    display: none;
+  }
 }
 </style>
