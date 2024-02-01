@@ -1,0 +1,18 @@
+<template>
+  <v-page
+    ref="pageRef"
+    :columns="columns"
+    :get-list="{{ getList }}"
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { {{ getList }} } from '@/api/{{ module }}'
+
+const columns = ref(
+  {{ columns }}
+)
+
+const pageRef = ref(null)
+</script>

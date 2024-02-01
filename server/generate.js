@@ -6,7 +6,8 @@ const log = message => console.log(chalk.green(`${message}`))
 const successLog = message => console.log(chalk.blue(`${message}`))
 const errorLog = error => console.log(chalk.red(`${error}`))
 
-const { vueTemplate } = require('./template.js') // 引入模板文件
+const template = require('art-template')
+
 // 创建文件
 function generateFile(path, data) {
   if (fs.existsSync(path)) {
@@ -47,7 +48,7 @@ function mkdirs(directory, callback) {
   }
 }
 
-const generate = async (dirName, fileName = 'index.vue') => {
+const generate = async (dirName, params, fileName = 'index.vue') => {
   /**   * 文件目录路径   */
   const projectDirectory = pathResolve('../src', dirName) // 生成目录放在src下
   const hasprojectDirectory = fs.existsSync(projectDirectory)
@@ -58,10 +59,11 @@ const generate = async (dirName, fileName = 'index.vue') => {
     dotExistDirectoryCreate(pathResolve(projectDirectory)) // 创建文件夹
 
   }
-  await generateFile(filePath, vueTemplate) // 创建文件
+
+  const html = template(__dirname + '/server/template.art', params);
+
+  await generateFile(filePath, html) // 创建文件
   successLog('文件生成成功')
 }
-
-// generate('test/aaa', 'bbb.vue')
 
 export default generate

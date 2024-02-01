@@ -1,7 +1,9 @@
 const Koa = require('koa')
 const { koaBody } = require('koa-body')
+const Router = require('@koa/router')
 
 const app = new Koa()
+const router = new Router()
 
 app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Origin', '*')
@@ -15,11 +17,23 @@ app.use(async (ctx, next) => {
 })
 
 app.use(koaBody())
-app.use(ctx => {
-  console.log(ctx.request.body)
-  ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
+
+app.use(async (ctx, next) => {
+  try {
+    ctx.body = ctx.request.body
+  } catch (e) {
+    ctx.body = {}
+  }
+
+  await next()
 })
 
+
+router.post('/pull', ctx => {
+  ctx.body = 'ok'
+})
+
+app.use(router.routes()).use(router.allowedMethods())
 
 app.listen(3000)
 
