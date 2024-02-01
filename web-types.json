@@ -120,6 +120,13 @@
               "type": [
                 "Function"
               ]
+            },
+            {
+              "name": "onAdd",
+              "description": "添加一行方法",
+              "type": [
+                "Function"
+              ]
             }
           ],
           "js": {
