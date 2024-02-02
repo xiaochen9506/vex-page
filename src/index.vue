@@ -30,6 +30,7 @@ const getList = () => {
             name: '张三',
             age: 18,
             gender: 0,
+            radio: 0,
             select: 0,
             number: 5000,
             table: [
@@ -50,6 +51,7 @@ const getList = () => {
             name: '李四',
             age: 19,
             gender: 1,
+            radio: 1,
             select: 0,
             number: 25000,
             table: [
@@ -99,6 +101,7 @@ const columns = [
   { label: 'input', prop: 'age', scope: 'input', change },
   { label: 'select', prop: 'select', scope: 'select', options: select },
   { label: '性别', prop: 'gender', scope: 'tag', options: gender },
+  { label: 'radio', prop: 'radio', scope: 'radio', options: gender },
 
   // { label: '嵌套', prop: 'table', scope: 'table',
   //   options: [
