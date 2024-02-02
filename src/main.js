@@ -1,9 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import VexPage, { setConfig } from '../packages/index' //导入
+import VexPage, { setConfig } from '../lib/index' //导入
 import router from './router'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import '../lib/style.css'
 
 
 

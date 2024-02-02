@@ -172,7 +172,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .v-table {
   position: relative;
   width: 100%;

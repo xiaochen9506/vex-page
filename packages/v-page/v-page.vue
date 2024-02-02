@@ -200,7 +200,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .v-page {
   position: relative;
   &.pd {
