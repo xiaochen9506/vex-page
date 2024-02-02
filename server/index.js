@@ -19,25 +19,14 @@ app.use(async (ctx, next) => {
 
 app.use(koaBody())
 
-app.use(async (ctx, next) => {
-  try {
-    ctx.body = ctx.request.body
-  } catch (e) {
-    ctx.body = {}
-  }
-
-  await next()
-})
-
-
 router.post('/generate', async ctx => {
-  const { dirName, params, fileName } = ctx.body
+  const { dirName, params, fileName } = ctx.request.body
   generate(dirName, params, fileName)
     .then(() => {
-      ctx.body = JSON.stringify({ code: 200 })
+      ctx.body = { code: 200 }
     })
     .catch(err => {
-      ctx.body = JSON.stringify({ code: 500, msg: err })
+      ctx.body = { code: 500, msg: err }
     })
 })
 

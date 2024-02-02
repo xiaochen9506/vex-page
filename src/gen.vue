@@ -23,7 +23,7 @@
       </el-col>
 
       <el-form-item label="表格内容">
-        <v-table :columns="columns" :data="data" :on-add="pushItem" />
+        <v-table :columns="columns" :data="data" :on-add="pushItem" @delete="remove" />
       </el-form-item>
     </el-form>
 
@@ -49,17 +49,37 @@ const columns = [
       { label: 'btn', value: 'btn' },
     ]
   },
+  {
+    label: '是否是filter', prop: 'filter', scope: 'radio',
+    options: [
+      { label: '是', value: true },
+      { label: '否', value: false },
+    ]
+  },
+  {
+    label: '操作',
+    prop: 'operate',
+    scope: 'btn',
+    options: [
+      { text: '删除', event: 'delete' }
+    ]
+  }
 ]
 
-const initItem = () => ({
-  label: '',
-  prop: '',
+const initItem = (label, prop) => ({
+  label,
+  prop,
   scope: '',
+  filter: false,
 })
 
 const data = ref([])
 const pushItem = () => {
   data.value.push(initItem())
+}
+
+const remove = (index) => {
+  data.value.splice(index, 1)
 }
 
 const textarea = ref()
@@ -69,11 +89,7 @@ const parse = () => {
     Object.keys(obj).forEach(key => {
       const index = data.value.findIndex(item => item.prop === key)
       if (index === -1) {
-        data.value.push({
-          label: key,
-          prop: key,
-          scope: ''
-        })
+        data.value.push(initItem(key, key))
       }
     })
   } catch (e) {
@@ -86,27 +102,49 @@ const form = ref({
   fileName: 'index.vue'
 })
 
-const filterEmptyKey = (obj) => {
-  const res = {}
-  Object.keys(obj).forEach(key => {
-    if (obj[key]) {
-      res[key] = obj[key]
+const getColumns = () => {
+  return data.value.map(item => {
+    // undefined 在模版生成前会被JSON.stringify去掉
+    const obj = {
+      label: item.label,
+      prop: item.prop,
+      scope: item.scope || undefined
     }
+
+    if (['btn', 'table', 'tag', 'select'].includes(item.scope)) {
+      obj.options = item.options || []
+    }
+
+    return obj
   })
-  return res
+}
+
+const getFilter = () => {
+  return data.value.filter(item => item.filter)
+    .map(item => {
+      return {
+        label: item.label,
+        prop: item.prop,
+        scope: item.scope === 'tag' ? 'select' : item.scope,
+      }
+    })
 }
 
 const submit = async () => {
+
+  const params = {
+    columns: getColumns(),
+    filter: getFilter(),
+    getList: 'testApi',
+    module: 'test',
+  }
+
   // fetch localhost:3000
   const res = await fetch('http://localhost:3000/generate', {
     method: 'POST',
     body: JSON.stringify({
       ...form.value,
-      params: {
-        columns: data.value.map(item => filterEmptyKey(item)),
-        getList: 'testApi',
-        module: 'test',
-      }
+      params
     }),
     headers: {
       'Content-Type': 'application/json'
