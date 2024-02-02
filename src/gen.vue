@@ -13,6 +13,15 @@
           </el-form-item>
         </el-col>
       </el-row>
+
+
+      <el-col :span="24">
+        <el-form-item label="接口返回值">
+          <el-input v-model="textarea" type="textarea" :rows="10"></el-input>
+          <el-button @click="parse">解析</el-button>
+        </el-form-item>
+      </el-col>
+
       <el-form-item label="表格内容">
         <v-table :columns="columns" :data="data" :on-add="pushItem" />
       </el-form-item>
@@ -48,10 +57,28 @@ const initItem = () => ({
   scope: '',
 })
 
-const data = ref([initItem()])
-
+const data = ref([])
 const pushItem = () => {
   data.value.push(initItem())
+}
+
+const textarea = ref()
+const parse = () => {
+  try {
+    const obj = JSON.parse(textarea.value)
+    Object.keys(obj).forEach(key => {
+      const index = data.value.findIndex(item => item.prop === key)
+      if (index === -1) {
+        data.value.push({
+          label: key,
+          prop: key,
+          scope: ''
+        })
+      }
+    })
+  } catch (e) {
+    ElMessage.error('解析失败: ' + e)
+  }
 }
 
 const form = ref({
@@ -91,7 +118,7 @@ const submit = async () => {
 
   if (res.code === 200) {
     ElMessage.success('创建成功')
-    data.value = [initItem()]
+    data.value = []
     form.value = {
       dirName: '',
       fileName: 'index.vue'

@@ -2,6 +2,7 @@
   <v-page
     ref="pageRef"
     :columns="columns"
+    :filter="filter"
     :get-list="{{ getList }}"
   />
 </template>
@@ -11,6 +12,8 @@ import { ref } from 'vue'
 import { {{ getList }} } from '@/api/{{ module }}'
 
 const columns = ref({{@ columns }})
+
+const filter = ref({{@ filter }})
 
 const pageRef = ref(null)
 </script>
