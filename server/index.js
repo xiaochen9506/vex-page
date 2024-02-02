@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const { koaBody } = require('koa-body')
 const views = require('koa-views')
+const static = require('koa-static')
 const path = require('path')
 const app = new Koa()
 const routes = require('./routes')
@@ -17,6 +18,7 @@ app.use(async (ctx, next) => {
 })
 
 app.use(views(path.join(__dirname, 'views/'), { extension: 'html' }))
+app.use(static(path.join(__dirname, 'views')))
 
 app.use(koaBody())
 

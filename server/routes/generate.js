@@ -5,13 +5,12 @@ const router = new Router()
 
 router.post('/generate', async ctx => {
   const { dirName, params, fileName } = ctx.request.body
-  generate(dirName, params, fileName)
-    .then(() => {
-      ctx.body = { code: 200 }
-    })
-    .catch(err => {
-      ctx.body = { code: 500, msg: err }
-    })
+  try {
+    await generate(dirName, params, fileName)
+    ctx.body = { code: 200 }
+  } catch (e) {
+    ctx.body = { code: 500, msg: e }
+  }
 })
 
 module.exports = router

@@ -1,58 +1,14 @@
-<html>
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     <meta charset="UTF-8">
-  <!-- Import style -->
-  <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
-  <!-- Import Vue 3 -->
-  <script src="//unpkg.com/vue@3"></script>
-  <!-- Import component library -->
-  <script src="//unpkg.com/element-plus"></script>
-</head>
-<body>
-<div id="app">
-  test
-</div>
-
-<script>
-  const request = async (url, data = {}) => {
-    const res = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => res.json())
-      .catch(err => console.error(err))
-
-    if (res.code !== 200) {
-      alert(res.msg)
-      return
-    }
-
-    return res.data
-  }
-
-
-  const { createApp } = Vue
-
-  createApp({
-    data() {
-      return {
-        io: undefined,
-        userId: undefined,
-        list: [],
-        project: {},
-        active: {},
-      }
-    },
-    mounted() {
-
-    },
-    methods: {
-
-    },
-  }).mount('#app')
-</script>
-</body>
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+    <script type="module" crossorigin src="/assets/index-arY5h6ZH.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-7PeOhk1C.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>
