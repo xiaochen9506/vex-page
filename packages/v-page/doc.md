@@ -26,7 +26,7 @@ const btns = [
 ]
  
 const filters = [
-  { label: '姓名', prop: 'name', type: 'input' }
+  { label: '姓名', prop: 'name', scope: 'input' }
 ]
 
 const getList = (params) => {
@@ -85,7 +85,7 @@ const getList = (params) => {
 |---------|---------------------|-------------------------------------------------------------------------|----|----------|
 | label   | 列名                  | _string_                                                                | -  | &#10004; |
 | prop    | 列属性                 | _string_                                                                | -  | &#10004; |
-| type   | 渲染表格类型              | input \| select \| date \| daterange \| month \| year \| monthrange \| cascader | -   | -        | - |
+| scope   | 渲染表格类型              | input \| select \| date \| daterange \| month \| year \| monthrange \| cascader | -   | -        | - |
 | options | scope对应类型的数据        | Array \| Function                                                       | -  | -        | - |
 
 ## 事件

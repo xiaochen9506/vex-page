@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/web-types",
   "framework": "vue",
-  "version": "1.0.24",
+  "version": "1.1.0",
   "name": "vex-page",
   "contributions": {
     "html": {
@@ -134,6 +134,48 @@
               {
                 "name": "btnClick",
                 "description": "点击按钮事件"
+              }
+            ]
+          }
+        },
+        {
+          "name": "v-filter",
+          "source": {
+            "symbol": "VFilter"
+          },
+          "description": "v-filter",
+          "props": [
+            {
+              "name": "filter",
+              "description": "筛选项配置",
+              "type": [
+                "Array"
+              ]
+            },
+            {
+              "name": "labelWidth",
+              "description": "label宽度",
+              "type": [
+                "String"
+              ]
+            },
+            {
+              "name": "col",
+              "description": "一行显示多少个筛选项",
+              "type": [
+                "Number"
+              ]
+            },
+          ],
+          "js": {
+            "events": [
+              {
+                "name": "search",
+                "description": "搜索"
+              },
+              {
+                "name": "reset",
+                "description": "重置"
               }
             ]
           }

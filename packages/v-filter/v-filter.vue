@@ -13,9 +13,9 @@
       :style="getStyle()"
       :label-width="item.labelWidth || labelWidth"
     >
-      <el-input v-if="item.type === 'input'" v-model.trim="form[item.prop]" :placeholder="item.placeholder || '请输入'" />
+      <el-input v-if="item.scope === 'input'" v-model.trim="form[item.prop]" :placeholder="item.placeholder || '请输入'" />
       <el-select
-        v-if="item.type === 'select'"
+        v-if="item.scope === 'select'"
         v-model="form[item.prop]"
         :placeholder="item.placeholder || '请选择'"
         clearable
@@ -38,10 +38,10 @@
         />
       </el-select>
       <el-date-picker
-        v-if="datepicker.includes(item.type)"
+        v-if="datepicker.includes(item.scope)"
         v-model="form[item.prop]"
         :value-format="item.format || 'YYYY-MM-DD HH:mm:ss'"
-        :type="item.type"
+        :type="item.scope"
         :placeholder="item.placeholder || '请选择'"
         start-placeholder="开始"
         end-placeholder="结束"
@@ -49,7 +49,7 @@
         clearable
         @change="(e) => dateChange(e, item)"
       />
-      <el-row v-if="item.type === 'range'" type="flex" align="middle">
+      <el-row v-if="item.scope === 'range'" type="flex" align="middle">
         <el-col :span="11">
           <el-input v-model="form[item.startKey]" :placeholder="item.placeholder || '请输入'" style="width: 100%;" />
         </el-col>
@@ -59,7 +59,7 @@
         </el-col>
       </el-row>
       <el-cascader
-        v-if="item.type === 'cascader'"
+        v-if="item.scope === 'cascader'"
         v-model="form[item.prop]"
         :options="item.options"
         :props="item.cascaderProps || { checkStrictly: true, emitPath: false }"
@@ -134,11 +134,11 @@ const clear = () => {
 }
 
 const getStyle = () => {
-  return `width: calc(100% / ${props.col})`
+  return `width: ${100 /props.col}%`
 }
 
 const dateChange = (e, item) => {
-  if (datepicker.value.includes(item.type)) {
+  if (datepicker.value.includes(item.scope)) {
     if (item.startKey) {
       form.value[item.startKey] = e && e.length > 1 ? e[0] : ''
     }
@@ -168,7 +168,6 @@ const search = () => {
 
 const reset = () => {
   clear()
-  proxy.$emit('search', {})
   proxy.$emit('reset')
 }
 
