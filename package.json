@@ -1,6 +1,6 @@
 {
   "name": "vex-page",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "description": "vue3 管理后台通用列表页面。Vue3 + Element Plus",
   "author": "xiaochen9506",
   "keywords": [
@@ -38,6 +38,9 @@
     "vite": "^5.0.10",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-router": "^4.2.5"
+  },
+  "peerDependencies": {
+    "element-plus": "^1.0.0"
   },
   "license": "ISC",
   "web-types": "web-types.json"
