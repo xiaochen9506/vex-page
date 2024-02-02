@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const { koaBody } = require('koa-body')
 const Router = require('@koa/router')
+const generate = require('./generate')
 
 const app = new Koa()
 const router = new Router()
@@ -29,8 +30,15 @@ app.use(async (ctx, next) => {
 })
 
 
-router.post('/pull', ctx => {
-  ctx.body = 'ok'
+router.post('/generate', async ctx => {
+  const { dirName, params, fileName } = ctx.body
+  generate(dirName, params, fileName)
+    .then(() => {
+      ctx.body = JSON.stringify({ code: 200 })
+    })
+    .catch(err => {
+      ctx.body = JSON.stringify({ code: 500, msg: err })
+    })
 })
 
 app.use(router.routes()).use(router.allowedMethods())

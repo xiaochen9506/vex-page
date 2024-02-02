@@ -12,7 +12,7 @@ const template = require('art-template')
 function generateFile(path, data) {
   if (fs.existsSync(path)) {
     errorLog(`${path}文件已存在`)
-    return
+    return Promise.reject(`${path}文件已存在`)
   }
   return new Promise((resolve, reject) => {
     fs.writeFile(path, data, 'utf8', err => {
@@ -20,6 +20,7 @@ function generateFile(path, data) {
         errorLog(err.message)
         reject(err)
       } else {
+        successLog('文件生成成功')
         resolve(true)
       }
     })
@@ -57,13 +58,35 @@ const generate = async (dirName, params, fileName = 'index.vue') => {
   if (!hasprojectDirectory) {
     log(`正在生成 文件目录 ${projectDirectory}`)
     dotExistDirectoryCreate(pathResolve(projectDirectory)) // 创建文件夹
-
   }
 
-  const html = template(__dirname + '/server/template.art', params);
 
-  await generateFile(filePath, html) // 创建文件
-  successLog('文件生成成功')
+  // object -> string
+  const obj = {}
+  Object.keys(params).forEach(key => {
+    if (typeof params[key] === 'object') {
+      obj[key] = JSON.stringify(params[key], null, 2)
+    } else {
+      obj[key] = params[key]
+    }
+  })
+
+  const html = template(__dirname + '/template.art', obj);
+
+  return generateFile(filePath, html)
 }
 
-export default generate
+// 对象要stringify 且 模版里要使用{{@ variable}} 语法
+// generate('server/views', {
+//   getList: 'testApi',
+//   module: 'test',
+//   columns: JSON.stringify([
+//     { label: '1', prop: '1' },
+//     { label: '1', prop: '1' },
+//     { label: '1', prop: '1' },
+//     { label: '1', prop: '1' },
+//     { label: '1', prop: '1' },
+//   ], null, 2)
+// })
+
+module.exports = generate
