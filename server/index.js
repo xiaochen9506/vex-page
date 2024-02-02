@@ -1,10 +1,9 @@
 const Koa = require('koa')
 const { koaBody } = require('koa-body')
-const Router = require('@koa/router')
-const generate = require('./generate')
-
+const views = require('koa-views')
+const path = require('path')
 const app = new Koa()
-const router = new Router()
+const routes = require('./routes')
 
 app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Origin', '*')
@@ -17,20 +16,11 @@ app.use(async (ctx, next) => {
   }
 })
 
+app.use(views(path.join(__dirname, 'views/'), { extension: 'html' }))
+
 app.use(koaBody())
 
-router.post('/generate', async ctx => {
-  const { dirName, params, fileName } = ctx.request.body
-  generate(dirName, params, fileName)
-    .then(() => {
-      ctx.body = { code: 200 }
-    })
-    .catch(err => {
-      ctx.body = { code: 500, msg: err }
-    })
-})
-
-app.use(router.routes()).use(router.allowedMethods())
+routes(app)
 
 app.listen(3000)
 
