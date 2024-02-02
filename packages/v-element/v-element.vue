@@ -54,6 +54,9 @@
     :fit="col.fit || 'cover'"
   />
 
+  <el-radio-group v-if="col.scope === 'radio'" v-model="value" @change="change">
+    <el-radio v-for="item in col.options" :label="item.value" :key="item.label">{{ item.label }}</el-radio>
+  </el-radio-group>
 </template>
 
 <script setup>

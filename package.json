@@ -1,11 +1,14 @@
 {
   "name": "vex-page",
-  "version": "1.0.27",
-  "description": "vue3 管理后台通用列表页面。Vue3 + Element Plus",
+  "version": "1.0.28",
+  "description": "vue3 管理后台通用列表页面，只需简单配置快速生成列表页、表格等，减少html代码。Vue3 + Element Plus",
   "author": "xiaochen9506",
   "keywords": [
     "vex-page",
-    "vue3-common-page"
+    "vue3-common-page",
+    "element-plus",
+    "vue3",
+    "common-page"
   ],
   "main": "lib/index.mjs",
   "homepage": "https://github.com/xiaochen9506/vex-page",

@@ -14,6 +14,8 @@ scope 目前支持以下类型, 对应options要求有所不一样：
   - options: 数组类型, `{ label, value }`
 - tag 标签
   - options: 数组类型, `{ label, value }`
+- radio 单选框
+  - options: 数组类型, `{ label, value }`
 - table 表格
   - options: 表格columns配置 
 - btn 按钮
