@@ -130,8 +130,8 @@ const test = (row, index) => {
 }
 
 const filters = [
-  { label: '姓名', prop: 'name', type: 'input' },
-  { label: '性别', prop: 'gender', type: 'select', options: gender },
+  { label: '姓名', prop: 'name', scope: 'input' },
+  { label: '性别', prop: 'gender', scope: 'select', options: gender },
 ]
 
 // 按钮

@@ -34,7 +34,7 @@ V-Filter 是一个基于 ElementUI 的筛选组件，支持多种类型的筛选
 |----------|---------------------------|---------------------------------------------------------------------------------| --- |----------|
 | label    | 筛选条件label                 | String                                                                          | - | &#10004; |
 | prop     | 筛选条件字段                    | String                                                                          | - | &#10004; |
-| type     | 筛选条件类型                    | input \| select \| date \| daterange \| month \| year \| monthrange \| cascader | - | -        |
+| scope    | 筛选条件类型                    | input \| select \| date \| daterange \| month \| year \| monthrange \| cascader | - | -        |
 | options  | 筛选条件选项                    | Array                                                                           | - | -        | - |
 | startKey | 当type为时间范围类型时, 指定开始时间的key | String                                                                          | - | -        | - |
 | endKey   | 当type为时间范围类型时, 指定结束时间的key | String                                                                          | - | -        | - |

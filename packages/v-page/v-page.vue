@@ -9,6 +9,7 @@
       :btns="filterBtns"
       :col="col"
       @search="handleSearch"
+      @reset="() => handleSearch({})"
     />
 
     <div class="v-page-operator">
