@@ -51,7 +51,7 @@
                   ...btn
                 }"
               >
-                {{ btn.text || (btn.render ? btn.render(row, $index) : '') }}
+                {{ btn.label || (btn.render ? btn.render(row, $index) : '') }}
               </el-button>
             </template>
 

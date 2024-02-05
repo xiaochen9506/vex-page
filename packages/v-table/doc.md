@@ -53,12 +53,12 @@ const data = [
 
 当scope为btn时，options配置如下：
 
-| 参数      | 说明          | 类型         | 默认值 | 必填 |
-|---------|-------------|------------|-----|----|
-| text    | 按钮文案        | _string_   | -   | -  |
-| click   | 点击事件        | _Function_ | -   | -  |
-| if      | 控制按钮显示的prop | _string_   | -   | -  |
-| render  | 自定义渲染 | _Function_   | -   | -  |
+| 参数     | 说明          | 类型         | 默认值 | 必填 |
+|--------|-------------|------------|-----|----|
+| label  | 按钮文案        | _string_   | -   | -  |
+| click  | 点击事件        | _Function_ | -   | -  |
+| if     | 控制按钮显示的prop | _string_   | -   | -  |
+| render | 自定义渲染 | _Function_   | -   | -  |
 
 
 ## 事件
@@ -69,7 +69,7 @@ const data = [
     const columns = [
       { label: '操作', prop: 'operate', scope: 'btn',
         options: [
-          { text: 'test', event: 'test' }
+          { label: 'test', event: 'test' }
         ]
     ]
     ```

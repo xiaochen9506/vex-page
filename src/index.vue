@@ -78,6 +78,7 @@ const pageRef = ref(null)
 const gender = [
   { label: '男', value: 0, type: 'info' },
   { label: '女', value: 1, type: 'success' },
+  { label: 'LGBT', value: 2, type: 'success' },
 ]
 
 const select = [
@@ -120,7 +121,7 @@ const columns = [
     width: 200,
     scope: 'btn',
     options: [
-      { text: 'test', event: 'test', if: row => row.btn }
+      { label: 'test', event: 'test', if: row => row.btn }
     ]
   },
 ]
@@ -131,13 +132,13 @@ const test = (row, index) => {
 
 const filters = [
   { label: '姓名', prop: 'name', scope: 'input' },
-  { label: '性别', prop: 'gender', scope: 'select', options: gender },
+  { label: '性别', prop: 'gender', scope: 'select', options: gender, multiple: true },
 ]
 
 // 按钮
 const btns = [
   {
-    text: '测试',
+    label: '测试',
     click: test
   },
 ]

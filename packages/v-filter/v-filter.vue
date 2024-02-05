@@ -1,87 +1,107 @@
 <template>
   <el-form
     ref="filterForm"
-    inline
     :model="form"
     :label-width="labelWidth"
     class="v-filter"
   >
-    <el-form-item
-      v-for="(item) in list"
-      :key="item.prop"
-      :label="item.label"
-      :style="getStyle()"
-      :label-width="item.labelWidth || labelWidth"
-    >
-      <el-input v-if="item.scope === 'input'" v-model.trim="form[item.prop]" :placeholder="item.placeholder || '请输入'" />
-      <el-select
-        v-if="item.scope === 'select'"
-        v-model="form[item.prop]"
-        :placeholder="item.placeholder || '请选择'"
-        clearable
-        :remote="item.remote"
-        :filter-method="(query) => item.remoteMethod(query, item)"
-        :filterable="item.filterable"
-        :default-first-option="item.defaultFirstOption"
-
-        @change="function (val) {
-          if(item.onchange) {
-            item.onchange(val)
-          }
-        }"
+    <el-row :gutter="20">
+      <el-col
+        :span="span"
+        v-for="(item) in list"
+        :key="item.prop"
       >
-        <el-option
-          v-for="option in (item.options || [])"
-          :key="option.value"
-          :label="option.label"
-          :value="option.value"
-        />
-      </el-select>
-      <el-date-picker
-        v-if="datepicker.includes(item.scope)"
-        v-model="form[item.prop]"
-        :value-format="item.format || 'YYYY-MM-DD HH:mm:ss'"
-        :type="item.scope"
-        :placeholder="item.placeholder || '请选择'"
-        start-placeholder="开始"
-        end-placeholder="结束"
+        <el-form-item
+          :label="item.label"
+          :label-width="item.labelWidth || labelWidth"
+        >
 
-        clearable
-        @change="(e) => dateChange(e, item)"
-      />
-      <el-row v-if="item.scope === 'range'" type="flex" align="middle">
-        <el-col :span="11">
-          <el-input v-model="form[item.startKey]" :placeholder="item.placeholder || '请输入'" style="width: 100%;" />
-        </el-col>
-        <el-col class="line" :span="2">-</el-col>
-        <el-col :span="11">
-          <el-input v-model="form[item.endKey]" :placeholder="item.placeholder || '请输入'" style="width: 100%;" />
-        </el-col>
-      </el-row>
-      <el-cascader
-        v-if="item.scope === 'cascader'"
-        v-model="form[item.prop]"
-        :options="item.options"
-        :props="item.cascaderProps || { checkStrictly: true, emitPath: false }"
-        :collapse-tags="item.collapseTags"
-        clearable
+          <el-input v-if="item.scope === 'input'" v-model.trim="form[item.prop]"
+                    :placeholder="item.placeholder || '请输入'" />
+          <el-select
+            v-if="item.scope === 'select'"
+            v-model="form[item.prop]"
+            :placeholder="item.placeholder || '请选择'"
+            clearable
+            filterable
+            v-bind="{
+            ...item
+          }"
+            @change="function (val) {
+            if(item.onchange) {
+              item.onchange(val)
+            }
+          }"
+          >
+            <el-option
+              v-for="option in (item.options || [])"
+              :key="option.value"
+              :label="option.label"
+              :value="option.value"
+            />
+          </el-select>
+          <el-date-picker
+            v-if="datepicker.includes(item.scope)"
+            v-model="form[item.prop]"
+            :value-format="item.format || 'YYYY-MM-DD HH:mm:ss'"
+            :type="item.scope"
+            :placeholder="item.placeholder || '请选择'"
+            start-placeholder="开始"
+            end-placeholder="结束"
 
-      />
-    </el-form-item>
-    <el-form-item label=" ">
-      <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
-      <el-button :icon="Refresh" @click="reset">重置</el-button>
-      <el-button v-for="item in btns" :key="item.text" @click="item.click">{{ item.text }}</el-button>
-    </el-form-item>
+            clearable
+            @change="(e) => dateChange(e, item)"
+          />
+          <el-row v-if="item.scope === 'range'" type="flex" align="middle">
+            <el-col :span="11">
+              <el-input v-model="form[item.startKey]" :placeholder="item.placeholder || '请输入'"
+                        style="width: 100%;" />
+            </el-col>
+            <el-col class="line" :span="2">-</el-col>
+            <el-col :span="11">
+              <el-input v-model="form[item.endKey]" :placeholder="item.placeholder || '请输入'" style="width: 100%;" />
+            </el-col>
+          </el-row>
+          <el-cascader
+            v-if="item.scope === 'cascader'"
+            v-model="form[item.prop]"
+            :options="item.options"
+            :props="item.cascaderProps || { checkStrictly: true, emitPath: false }"
+            :collapse-tags="item.collapseTags"
+            clearable
+
+          />
+        </el-form-item>
+      </el-col>
+
+      <el-col :span="span">
+        <el-form-item label=" ">
+          <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
+          <el-button :icon="Refresh" @click="reset">重置</el-button>
+          <el-button v-for="item in btns" :key="item.text" @click="item.click">{{ item.text }}</el-button>
+        </el-form-item>
+      </el-col>
+    </el-row>
   </el-form>
 </template>
 
 <script setup>
-import { defineProps, ref, watch, onMounted, getCurrentInstance } from 'vue'
-import { ElForm, ElFormItem, ElInput, ElSelect, ElOption, ElDatePicker, ElRow, ElCol, ElCascader, ElButton } from 'element-plus'
+import { defineProps, ref, watch, onMounted, getCurrentInstance, computed } from 'vue'
+import {
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElSelect,
+  ElOption,
+  ElDatePicker,
+  ElRow,
+  ElCol,
+  ElCascader,
+  ElButton
+} from 'element-plus'
 import {
   Search,
-  Refresh,
+  Refresh
 } from '@element-plus/icons-vue'
 
 const { proxy } = getCurrentInstance()
@@ -106,13 +126,17 @@ const props = defineProps({
   },
   col: {
     type: Number,
-    default: 4,
+    default: 4
   }
 })
 
 const form = ref({})
 const list = ref([])
 const datepicker = ref(['date', 'daterange', 'month', 'year', 'monthrange'])
+
+const span = computed(() => {
+  return 24 / props.col
+})
 
 watch(() => props.filter, (val) => {
   initFilter(val)
@@ -131,10 +155,6 @@ const initFilter = (val = []) => {
 
 const clear = () => {
   form.value = {}
-}
-
-const getStyle = () => {
-  return `width: ${100 /props.col}%`
 }
 
 const dateChange = (e, item) => {
@@ -180,36 +200,8 @@ onMounted(() => {
 .v-filter {
   background: #fff;
   border-bottom: 5px solid #f2f2f2;
-  display: flex;
-  flex-wrap: wrap;
   padding: 10px;
 
-  ::v-deep .el-form-item {
-    display: flex;
-    align-items: center;
-    margin-right: 0;
-    margin-left: 0;
-    margin-bottom: 5px;
-  }
-
-  ::v-deep .el-form-item__content {
-    flex: 1;
-
-    .el-select {
-      width: 100%;
-    }
-  }
-
-  .el-date-editor {
-    width: 100%;
-  }
-
-  .el-date-editor--daterange.el-input,
-  .el-date-editor--daterange.el-input__inner,
-  .el-date-editor--timerange.el-input,
-  .el-date-editor--timerange.el-input__inner {
-    width: 100%;
-  }
   .line {
     text-align: center;
   }

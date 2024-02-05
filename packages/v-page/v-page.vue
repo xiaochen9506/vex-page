@@ -20,7 +20,7 @@
 
         @click="(e)=> item.click && item.click(e)"
       >
-        {{ item.text }}
+        {{ item.label }}
       </el-button>
       <slot name="btn" />
     </div>

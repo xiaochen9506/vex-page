@@ -22,7 +22,7 @@ const columns = [
 ]
 
 const btns = [
-  { text: '新增', click: () => console.log('新增') }
+  { label: '新增', click: () => console.log('新增') }
 ]
  
 const filters = [
@@ -74,9 +74,9 @@ const getList = (params) => {
 
 ### Btn
 
-| 参数   | 说明   | 类型      | 默认值 | 必填       |
-|------|------|---------|----|----------|
-| text | 按钮文字 | _string_ | -  | &#10004; |
+| 参数    | 说明   | 类型      | 默认值 | 必填       |
+|-------|------|---------|----|----------|
+| label | 按钮文字 | _string_ | -  | &#10004; |
 | click | 点击事件 | _Function_ | -  | &#10004; |
 
 ### Filter
@@ -100,7 +100,7 @@ const getList = (params) => {
     const columns = [
       { label: '操作', prop: 'operate', scope: 'btn',
         options: [
-          { text: 'test', event: 'test' }
+          { label: 'test', event: 'test' }
         ]
     ]
     ```
