@@ -54,13 +54,23 @@
     :fit="col.fit || 'cover'"
   />
 
+  <el-date-picker
+    v-if="['year', 'month', 'date', 'dates', 'datetime', 'week', 'datetimerange', 'daterange', 'monthrange'].includes(col.scope)"
+    v-bind="{
+      ...col
+    }"
+    type="col.scope"
+    v-model="value"
+    @change="change"
+  />
+
   <el-radio-group v-if="col.scope === 'radio'" v-model="value" @change="change">
     <el-radio v-for="item in col.options" :label="item.value" :key="item.label">{{ item.label }}</el-radio>
   </el-radio-group>
 </template>
 
 <script setup>
-import { ElInput, ElSelect, ElOption, ElTag } from 'element-plus'
+import { ElInput, ElSelect, ElOption, ElTag, ElDatePicker } from 'element-plus'
 import { defineProps, ref, watch } from 'vue'
 
 const props = defineProps({
