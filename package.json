@@ -1,6 +1,6 @@
 {
   "name": "vex-page",
-  "version": "1.1.6",
+  "version": "1.1.9",
   "description": "vue3 管理后台通用列表页面，只需简单配置快速生成列表页、表格等，减少html代码。Vue3 + Element Plus",
   "author": "xiaochen9506",
   "keywords": [
@@ -10,7 +10,7 @@
     "vue3",
     "common-page"
   ],
-  "main": "lib/index.mjs",
+  "main": "packages/index.js",
   "homepage": "https://github.com/xiaochen9506/vex-page",
   "scripts": {
     "dev": "vite",
@@ -21,6 +21,7 @@
     "server": "node server/index.js"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "element-plus": "^2.5.2",
     "sortablejs": "^1.15.2",
     "unplugin-icons": "^0.18.2",
