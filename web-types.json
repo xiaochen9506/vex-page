@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/web-types",
   "framework": "vue",
-  "version": "1.1.0",
+  "version": "1.1.11",
   "name": "vex-page",
   "contributions": {
     "html": {
@@ -165,7 +165,7 @@
               "type": [
                 "Number"
               ]
-            },
+            }
           ],
           "js": {
             "events": [
