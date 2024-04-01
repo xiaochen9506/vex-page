@@ -148,7 +148,6 @@ const fetchList = async (query) => {
     [PAGE_SIZE_KEY]: pagination.value.pageSize || 10,
     ...query,
   }
-  console.log(query)
   // 默认第一页
   const res = await props.getList(params.value)
   let data = GET_LIST(res)

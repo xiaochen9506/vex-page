@@ -3,7 +3,9 @@
     <el-table
       ref="tableRef"
       border
-      v-bind="$attrs"
+      v-bind="{
+        ...tableProps
+      }"
       :data="data"
       @selection-change="selection"
       :highlight-current-row="!!radio"
@@ -86,7 +88,6 @@ const props = defineProps({
   onAdd: {
     type: Function
   },
-
   onSize: {
     type: Boolean,
     default: false
@@ -96,6 +97,10 @@ const props = defineProps({
   sortable: {
     type: Boolean,
     default: false
+  },
+  tableProps: {
+    type: Object,
+    default: () => ({}),
   },
 })
 
