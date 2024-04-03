@@ -32,7 +32,11 @@
         }"
       >
         <template #default="{ row, $index }">
-          <VElement v-if="!['btn', 'table'].includes(item.scope)" :row="row" :col="item" />
+          <VElement
+            v-if="!['btn', 'table'].includes(item.scope)"
+            :row="row"
+            :col="item"
+          />
 
           <v-table
             v-if="item.scope === 'table'"
@@ -46,8 +50,9 @@
             <template v-for="btn in item.options || []" :key="btn.event">
               <el-button
                 v-if="!btn.if || (typeof btn.if === 'function' ? btn.if(row, $index) : row[btn.if])"
-                :type="btn.type || 'primary'"
                 text
+                class="v-table-btn"
+                :type="btn.type || 'primary'"
                 @click="btnClick(btn, row, $index)"
                 v-bind="{
                   ...btn
@@ -248,6 +253,10 @@ onUnmounted(() => {
 
   :deep(.el-input-number) {
     width: 100%;
+  }
+
+  .v-table-btn + .v-table-btn  {
+    margin-left: 0;
   }
 }
 </style>

@@ -72,6 +72,7 @@
 <script setup>
 import { ElInput, ElSelect, ElOption, ElTag, ElDatePicker } from 'element-plus'
 import { defineProps, ref, watch } from 'vue'
+import _ from 'lodash'
 
 const props = defineProps({
   row: {
@@ -84,19 +85,23 @@ const props = defineProps({
   },
 })
 
-const value = ref(props.row[props.col.prop])
+const emits = defineEmits(['update:row'])
 
-watch(() => props.row[props.col.prop], (val) => {
+const value = ref(_.get(props.row, props.col.prop))
+
+watch(() => _.get(props.row, props.col.prop), (val) => {
   value.value = val
 })
 
 const change = () => {
-  // eslint-disable-next-line vue/no-mutating-props
-  props.row[props.col.prop] = value.value
+  // 支持row['obj.x']形式
+  _.set(props.row, props.col.prop, value.value)
 
   if (props.col.change) {
     props.col.change(props.row, value.value)
   }
+
+  emits('update:row', props.row)
 }
 
 

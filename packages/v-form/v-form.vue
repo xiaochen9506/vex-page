@@ -16,6 +16,7 @@
           <v-element
             :row="form"
             :col="item"
+            @update:row="update"
           />
           <slot :name="item.prop"></slot>
         </el-form-item>
@@ -48,6 +49,8 @@ const props = defineProps({
   },
 })
 
+const emits = defineEmits(['update:value'])
+
 const form = ref({ ...props.value })
 const formRef = ref()
 
@@ -59,6 +62,10 @@ const reset = () => {
   form.value = {
     ...props.value,
   }
+}
+
+const update = (data) => {
+  emits('update:value', data)
 }
 
 const validate = () => {
