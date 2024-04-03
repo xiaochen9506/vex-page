@@ -1,11 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 const { readComments, componentWithComments } = require('./utils')
+const package = require('../package.json')
 
 const docJSON = {
   "$schema": "http://json.schemastore.org/web-types",
   "framework": "vue",
-  "version": "1.1.11",
+  "version": package.version,
   "name": "vex-page",
   "contributions": {
     "html": {
