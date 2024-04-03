@@ -71,38 +71,89 @@
 </template>
 
 <script setup>
+/**
+ * @name v-table
+ * @vue Component
+ * @description 基于el-table + v-element的表格组件
+ */
 import { ElTable, ElTableColumn, ElButton, ElRadio } from 'element-plus'
 import { defineProps, ref, onMounted, nextTick, onUnmounted, defineExpose, getCurrentInstance } from 'vue'
 import VElement from '../v-element/v-element.vue'
 import { copy } from '../utils/index'
 
 const props = defineProps({
+  /**
+   * @name data
+   * @vue Prop
+   * @description 数据源
+   * @type ["Array"]
+   * @default []
+   */
   data: {
     type: Array,
     default: () => ([]),
   },
+  /**
+   * @name columns
+   * @vue Prop
+   * @description 列配置
+   * @type ["Array"]
+   */
   columns: {
     type: Array,
   },
+  /**
+   * @name selection
+   * @vue Prop
+   * @description 多选
+   * @type ["Function"]
+   */
   selection: {
     type: Function
   },
+  /**
+   * @name radio
+   * @vue Prop
+   * @description 单选
+   * @type ["Function"]
+   */
   radio: {
     type: Function,
   },
+  /**
+   * @name onAdd
+   * @vue Prop
+   * @description 添加按钮
+   * @type ["Function"]
+   */
   onAdd: {
     type: Function
   },
+  /**
+   * @name onSize
+   * @vue Prop
+   * @description 是否监听窗口变化
+   * @type ["Boolean"]
+   * @default false
+   */
   onSize: {
     type: Boolean,
     default: false
   },
+  /**
+   * @name height
+   * @vue Prop
+   * @description 表格高度
+   * @type ["String", "Number"]
+   */
   height: [String, Number],
-  maxHeight: [String, Number],
-  sortable: {
-    type: Boolean,
-    default: false
-  },
+  /**
+   * @name tableProps
+   * @vue Prop
+   * @description el-table属性
+   * @type ["Object"]
+   * @default {}
+   */
   tableProps: {
     type: Object,
     default: () => ({}),
@@ -114,20 +165,6 @@ const { proxy } = getCurrentInstance()
 const radioValue = ref(null)
 const autoMaxHeight = ref(null)
 const tableRef = ref(null)
-
-
-const copyTxt = (row, column) => {
-  const { scope, prop, render } = column
-  let text
-  if (scope === 'render') {
-    text = render(row)
-  } else if (scope === 'tag') {
-    text = this.getTagName(row, column)
-  } else {
-    text = row[prop]
-  }
-  copy(text)
-}
 
 const setTableHeight = () => {
   const table = document.querySelector('.table-container .c-table')

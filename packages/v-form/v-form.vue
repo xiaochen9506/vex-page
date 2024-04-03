@@ -26,23 +26,56 @@
 </template>
 
 <script setup>
+/**
+ * @name v-form
+ * @vue Component
+ * @description 基于el-form + el-col + v-element组件
+ */
 import { watch, ref, defineProps } from 'vue'
 import VElement from '../v-element/v-element.vue'
 import { ElFormItem, ElForm, ElCol, ElRow } from 'element-plus'
 
 const props = defineProps({
+  /**
+   * @name list
+   * @vue Prop
+   * @description 配置
+   * @type ["Array"]
+   * @default []
+   */
   list: {
     type: Array,
     default: () => ([]),
   },
+  /**
+   * @name value
+   * @vue Prop
+   * @description 表单数据
+   * @type ["Object"]
+   * @default {}
+   */
   value: {
     type: Object,
     default: () => ({}),
   },
+  /**
+   * @name rules
+   * @vue Prop
+   * @description 表单验证规则
+   * @type ["Object"]
+   * @default {}
+   */
   rules: {
     type: Object,
     default: () => ({}),
   },
+  /**
+   * @name col
+   * @vue Prop
+   * @description 列数
+   * @type ["Number"]
+   * @default 2
+   */
   col: {
     type: Number,
     default: 2,

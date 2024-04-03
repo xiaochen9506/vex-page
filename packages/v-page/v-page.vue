@@ -49,6 +49,11 @@
 </template>
 
 <script setup>
+/**
+ * @name v-page
+ * @vue Component
+ * @description v-page组件, 后台通用的列表页面组件
+ */
 import { defineProps, getCurrentInstance, ref, onMounted, defineExpose } from 'vue'
 
 import VFilter from '../v-filter/v-filter.vue'
@@ -59,31 +64,71 @@ import { GET_LIST, GET_TOTAL, PAGE_NUM_KEY, PAGE_SIZE_KEY } from '../config'
 const { proxy } = getCurrentInstance()
 
 const props = defineProps({
+  /**
+   * @name showPagination
+   * @vue Prop
+   * @description 是否显示分页
+   * @type ["Boolean"]
+   * @default true
+   */
   showPagination: {
     type: Boolean,
     default: true
   },
-  // 表格列配置
+  /**
+   * @name columns
+   * @vue Prop
+   * @description 表格列配置
+   * @type ["Array"]
+   * @default []
+   */
   columns: {
     type: Array,
     default: () => ([])
   },
-  // 表格单选
+  /**
+   * @name radio
+   * @vue Prop
+   * @description 表格单选
+   * @type ["Function"]
+   */
   radio: {
     type: Function,
   },
-  // 表格多选回调
+  /**
+   * @name selection
+   * @vue Prop
+   * @description 表格多选
+   * @type ["Function"]
+   */
   selection: {
     type: Function
   },
-  // 表格添加按钮方法
+  /**
+   * @name onAdd
+   * @vue Prop
+   * @description 表格添加按钮方法
+   * @type ["Function"]
+   */
   onAdd: {
     type: Function
   },
-  // 筛选配置
+  /**
+   * @name filter
+   * @vue Prop
+   * @description 筛选配置
+   * @type ["Array"]
+   */
   filter: {
     type: Array,
   },
+  /**
+   * @name filterBtns
+   * @vue Prop
+   * @description 筛选按钮配置
+   * @type ["Array"]
+   * @default []
+   */
   filterBtns: {
     type: Array,
     default: () => ([])
@@ -93,20 +138,41 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
-  // 筛选项宽度设置
+  /**
+   * @name filterLabelWidth
+   * @vue Prop
+   * @description 筛选项宽度设置
+   * @type ["String"]
+   */
   filterLabelWidth: {
     type: String
   },
-  // 按钮配置
+  /**
+   * @name btns
+   * @vue Prop
+   * @description 按钮配置
+   * @type ["Array"]
+   * @default []
+   */
   btns: {
     type: Array,
     default: () => ([])
   },
-  // 表格获取数据源方法
+  /**
+   * @name getList
+   * @vue Prop
+   * @description 表格获取数据源方法
+   * @type ["Function"]
+   */
   getList: {
     type: Function
   },
-  // 格式化数据
+  /**
+   * @name formatList
+   * @vue Prop
+   * @description 格式化数据
+   * @type ["Function"]
+   */
   formatList: {
     type: Function,
     default: null

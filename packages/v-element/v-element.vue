@@ -70,22 +70,49 @@
 </template>
 
 <script setup>
+/**
+ * @name v-element
+ * @vue Component
+ * @description 基于element-plus, 通过scope显示具体组件，用于v-table和v-form等
+ */
 import { ElInput, ElSelect, ElOption, ElTag, ElDatePicker } from 'element-plus'
 import { defineProps, ref, watch } from 'vue'
 import _ from 'lodash'
 
 const props = defineProps({
+  /**
+   * @name row
+   * @vue Prop
+   * @description 数据源
+   * @type ["Object"]
+   * @default {}
+   */
   row: {
     type: Object,
     default: () => ({})
   },
+  /**
+   * @name col
+   * @vue Prop
+   * @description 配置项
+   * @type ["Object"]
+   * @default {}
+   */
   col: {
     type: Object,
     default: () => ({})
   },
 })
 
-const emits = defineEmits(['update:row'])
+
+const emits = defineEmits([
+  /**
+   * @name update:row
+   * @vue Event
+   * @description 更新数据源
+   */
+  'update:row'
+])
 
 const value = ref(_.get(props.row, props.col.prop))
 

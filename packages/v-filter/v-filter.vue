@@ -84,6 +84,11 @@
 </template>
 
 <script setup>
+/**
+ * @name v-filter
+ * @vue Component
+ * @description v-page的筛选组件
+ */
 import { defineProps, ref, watch, onMounted, getCurrentInstance, computed } from 'vue'
 import {
   ElForm,
@@ -105,27 +110,55 @@ import {
 const { proxy } = getCurrentInstance()
 
 const props = defineProps({
+  /**
+   * @name filter
+   * @vue Prop
+   * @description 筛选项配置
+   * @type ["Array"]
+   * @default []
+   */
   filter: {
     type: Array,
     default: () => ([])
   },
+  /**
+   * @name btns
+   * @vue Prop
+   * @description 按钮配置
+   * @type ["Array"]
+   * @default []
+   */
   btns: {
     type: Array,
     default: () => ([])
+  },
+  /**
+   * @name labelWidth
+   * @vue Prop
+   * @description label宽度
+   * @type ["String"]
+   * @default 110px
+   */
+  labelWidth: {
+    type: String,
+    default: '110px'
+  },
+  /**
+   * @name col
+   * @vue Prop
+   * @description 一行几列
+   * @type ["Number"]
+   * @default 4
+   */
+  col: {
+    type: Number,
+    default: 4
   },
   // 筛选有些配置是通过接口获取，需要
   filterConfig: {
     type: Object,
     default: () => ({})
   },
-  labelWidth: {
-    type: String,
-    default: '110px'
-  },
-  col: {
-    type: Number,
-    default: 4
-  }
 })
 
 const form = ref({})

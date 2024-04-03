@@ -1,6 +1,6 @@
 {
   "name": "vex-page",
-  "version": "1.1.14",
+  "version": "1.1.16",
   "description": "vue3 管理后台通用列表页面，只需简单配置快速生成列表页、表格等，减少html代码。Vue3 + Element Plus",
   "author": "xiaochen9506",
   "keywords": [
@@ -14,7 +14,9 @@
   "homepage": "https://github.com/xiaochen9506/vex-page",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run doc && vite build",
+    "pub": "npm run doc && npm publish",
+    "doc": "node docs/index.js",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
@@ -29,8 +31,11 @@
     "vue": "^3.3.11"
   },
   "devDependencies": {
+    "@babel/parser": "^7.24.1",
+    "@babel/traverse": "^7.24.1",
     "@rushstack/eslint-patch": "^1.3.3",
     "@vitejs/plugin-vue": "^4.5.2",
+    "@vue/compiler-sfc": "^3.4.21",
     "@vue/eslint-config-prettier": "^8.0.0",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",

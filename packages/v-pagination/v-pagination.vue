@@ -11,6 +11,11 @@
 </template>
 
 <script setup>
+/**
+ * @name v-pagination
+ * @vue Component
+ * @description 分页组件
+ */
 import { defineProps, ref, watch, getCurrentInstance } from 'vue'
 import { scrollTo } from '../utils/scroll-to'
 import { ElPagination } from 'element-plus'
