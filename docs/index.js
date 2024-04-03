@@ -34,7 +34,10 @@ const readVueFiles = (dir) => {
 readVueFiles(path.resolve(__dirname, '../packages'))
 
 const comments = files.map(path => readComments(path))
-docJSON.contributions.html['vue-components'] = comments.map(item => componentWithComments(item))
+// 找出组件信息写入web-types.json
+docJSON.contributions.html['vue-components'] = comments
+  .map(item => componentWithComments(item))
+  .filter(item => item.name)
 fs.writeFileSync(path.resolve(__dirname, '../web-types.json'), JSON.stringify(docJSON, null, 2))
 
 console.log('doc generate done')
