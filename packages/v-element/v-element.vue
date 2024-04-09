@@ -77,7 +77,7 @@
  */
 import { ElInput, ElSelect, ElOption, ElTag, ElDatePicker } from 'element-plus'
 import { defineProps, ref, watch } from 'vue'
-import _ from 'lodash'
+import * as _ from 'lodash-es'
 
 const props = defineProps({
   /**
