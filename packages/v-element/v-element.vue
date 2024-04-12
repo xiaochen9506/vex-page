@@ -59,7 +59,7 @@
     v-bind="{
       ...col
     }"
-    type="col.scope"
+    :type="col.scope"
     v-model="value"
     @change="change"
   />
