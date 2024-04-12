@@ -187,3 +187,6 @@ const btns = [
 - table 表格
 - btn 按钮
 
+### 问题
+
+- 当项目element-plus是按需引用需要改为`import VexPage from 'vex-page/lib/index.js'`

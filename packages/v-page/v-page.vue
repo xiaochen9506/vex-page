@@ -267,19 +267,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.v-page {
-  position: relative;
-  &.pd {
-    padding-bottom: 20px;
-  }
-
-  .v-page-operator {
-    padding: 10px;
-  }
-
-  .v-page-table
-  {
-    padding: 0 10px;
-  }
-}
+@import "style";
 </style>

@@ -72,13 +72,5 @@ const handleCurrentChange = (val) => {
 </script>
 
 <style lang="scss">
-.v-pagination {
-  margin-top: 10px;
-  display: flex;
-  justify-content: flex-end;
-
-  &.hidden {
-    display: none;
-  }
-}
+@import "style";
 </style>

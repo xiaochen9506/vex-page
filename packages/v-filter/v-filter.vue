@@ -228,13 +228,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.v-filter {
-  background: #fff;
-  border-bottom: 5px solid #f2f2f2;
-  padding: 10px;
-
-  .line {
-    text-align: center;
-  }
-}
+@import "style";
 </style>

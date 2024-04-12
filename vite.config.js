@@ -22,6 +22,7 @@ export default defineConfig({
     }),
     VueSetupExtend()
   ],
+
   build: {
     outDir: 'lib', //输出文件名称
     lib: {

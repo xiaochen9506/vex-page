@@ -137,5 +137,3 @@ const getTag = (value, list) => {
   return item
 }
 </script>
-
-<style scoped></style>
