@@ -12,9 +12,9 @@ npm install vex-page
 
 ```js
 import VexPage, { setConfig } from 'vex-page' //导入
-// 按需引用需要改为
-// import VexPage from 'vex-page/lib/index.js'
-import 'vex-page/lib/style.css' //导入样式
+// 项目按需引用element-plus, 则需要改为
+// import VexPage from 'vex-page/es/index.mjs' 或 import VexPage from 'vex-page/lib/index.js'
+// import 'vex-page/es/style.css' 或 import 'vex-page/lib/style.css'
 
 // 设置配置文件
 setConfig({
@@ -159,7 +159,7 @@ const btns = [
 
 ## 效果
 
-![image](./public/img.png)
+![image](./assets/img.png)
 
 ## setConfig
 
