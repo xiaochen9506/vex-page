@@ -1,6 +1,6 @@
 {
   "name": "vex-page",
-  "version": "1.1.22",
+  "version": "1.1.23",
   "description": "vue3 管理后台通用列表页面，只需简单配置快速生成列表页、表格等，减少html代码。Vue3 + Element Plus",
   "author": "xiaochen9506",
   "keywords": [

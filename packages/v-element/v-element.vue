@@ -5,7 +5,7 @@
     {{ row[col.prop] ? Number(row[col.prop]).toLocaleString() : '' }}
   </div>
 
-  <div v-if="col.scope === 'render' && col.render">{{ col.render(row) }}</div>
+  <div v-if="col.scope === 'render' && col.render">{{ col.render(row, col.prop) }}</div>
 
   <el-input
     v-if="col.scope === 'input'"
