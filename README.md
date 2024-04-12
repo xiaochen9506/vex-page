@@ -12,6 +12,8 @@ npm install vex-page
 
 ```js
 import VexPage, { setConfig } from 'vex-page' //导入
+// 按需引用需要改为
+// import VexPage from 'vex-page/lib/index.js'
 import 'vex-page/lib/style.css' //导入样式
 
 // 设置配置文件
@@ -187,6 +189,3 @@ const btns = [
 - table 表格
 - btn 按钮
 
-### 问题
-
-- 当项目element-plus是按需引用需要改为`import VexPage from 'vex-page/lib/index.js'`
