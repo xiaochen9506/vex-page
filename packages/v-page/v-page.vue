@@ -177,6 +177,16 @@ const props = defineProps({
     type: Function,
     default: null
   },
+  /**
+   * @name init
+   * @vue Prop
+   * @description 初始化请求列表
+   * @type ["Boolean"]
+   */
+  init: {
+    type: Boolean,
+    default: true
+  },
   // 表格属性，透传下去
   table: {
     type: Object,
@@ -262,7 +272,9 @@ defineExpose({
 })
 
 onMounted(() => {
-  fetchList()
+  if (props.init) {
+    fetchList()
+  }
 })
 </script>
 
