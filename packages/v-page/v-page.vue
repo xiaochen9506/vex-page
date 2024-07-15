@@ -1,7 +1,7 @@
 <template>
   <div class="v-page" :class="{ pd: props.table && props.table.onAdd }">
     <VFilter
-      v-if="filter"
+      v-if="showFilter"
       ref="filter"
       :filter="filter"
       :filter-config="filterConfig"
@@ -124,6 +124,17 @@ const props = defineProps({
    */
   filter: {
     type: Array,
+  },
+  /**
+   * @name showFilter
+   * @vue Prop
+   * @description 是否显示筛选
+   * @type ["Boolean"]
+   * @default true
+   */
+  showFilter: {
+    type: Boolean,
+    default: true
   },
   /**
    * @name filterBtns
