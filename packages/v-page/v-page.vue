@@ -59,7 +59,9 @@ import { defineProps, getCurrentInstance, ref, onMounted, defineExpose } from 'v
 import VFilter from '../v-filter/v-filter.vue'
 import cPagination from '../v-pagination/v-pagination.vue'
 import VTable from '../v-table/v-table.vue'
-import { GET_LIST, GET_TOTAL, PAGE_NUM_KEY, PAGE_SIZE_KEY } from '../config'
+import { useConfig } from '../config'
+
+const { GET_LIST, GET_TOTAL, PAGE_NUM_KEY, PAGE_SIZE_KEY } = useConfig()
 
 const { proxy } = getCurrentInstance()
 

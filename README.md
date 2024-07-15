@@ -11,18 +11,19 @@ npm install vex-page
 ## 使用
 
 ```js
-import VexPage, { setConfig } from 'vex-page' //导入
+import VexPage from 'vex-page' //导入
 // 项目按需引用element-plus, 则需要改为
 // import VexPage from 'vex-page/es/index.mjs' 或 import VexPage from 'vex-page/lib/index.js'
 // import 'vex-page/es/style.css' 或 import 'vex-page/lib/style.css'
 
 // 设置配置文件
-setConfig({
-  pageSizeKey: 'pageSize',
-  pageNumKey: 'pageNum',
-  getList: res => res.data,
+app.use(VexPage, {
+  config: {
+    pageSizeKey: 'pageSize',
+    pageNumKey: 'pageNum',
+    getList: res => res.data,
+  }
 })
-app.use(VexPage)
 ```
 
 ```vue

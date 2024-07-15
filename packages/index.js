@@ -13,11 +13,14 @@ export {
   VElement,
   VPagination,
   VForm,
-  setConfig,
+  setConfig
 }
 
 export default {
-  install(app) {
+  install(app, options = {}) {
+    const { config } = options
+    if (config) setConfig(config, app)
+
     app.component('VPage', VPage)
     app.component('VFilter', VFilter)
     app.component('VTable', VTable)
