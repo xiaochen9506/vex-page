@@ -28,7 +28,6 @@
     <div class="v-page-table">
       <VTable
         ref="tableRef"
-        v-loading="loading"
         :data="list"
         :columns="columns"
         :selection="selection"
@@ -55,6 +54,8 @@
  * @description v-page组件, 后台通用的列表页面组件
  */
 import { defineProps, getCurrentInstance, ref, onMounted, defineExpose } from 'vue'
+
+import { ElButton, ElLoading } from 'element-plus'
 
 import VFilter from '../v-filter/v-filter.vue'
 import cPagination from '../v-pagination/v-pagination.vue'
@@ -197,7 +198,6 @@ const props = defineProps({
 })
 
 const list = ref([])
-const loading = ref(false)
 const params = ref({})
 const total = ref(0)
 const pagination = ref({})
@@ -220,7 +220,9 @@ const btnClick = ({ btn, row, index }) => {
 
 const fetchList = async (query) => {
   if (!props.getList) return
-  loading.value = true
+  const loading = ElLoading.service({
+    target: '.v-page-table'
+  })
   params.value = {
     [PAGE_NUM_KEY]: pagination.value.pageNum || 1,
     [PAGE_SIZE_KEY]: pagination.value.pageSize || 10,
@@ -238,7 +240,7 @@ const fetchList = async (query) => {
     index: index + 1 + (params.value[PAGE_NUM_KEY] - 1) * params.value[PAGE_SIZE_KEY]
   }))
   total.value = GET_TOTAL(res)
-  loading.value = false
+  loading.close()
 }
 
 const handlePagination = (p) => {
