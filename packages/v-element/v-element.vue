@@ -75,7 +75,7 @@
  * @vue Component
  * @description 基于element-plus, 通过scope显示具体组件，用于v-table和v-form等
  */
-import { ElInput, ElSelect, ElOption, ElTag, ElDatePicker } from 'element-plus'
+import { ElInput, ElInputNumber, ElSelect, ElOption, ElTag, ElDatePicker, ElRadioGroup, ElRadio, ElImage } from 'element-plus'
 import { defineProps, ref, watch } from 'vue'
 import * as _ from 'lodash-es'
 
