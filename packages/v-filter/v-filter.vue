@@ -1,86 +1,89 @@
 <template>
-  <el-form
-    ref="filterForm"
-    :model="form"
-    :label-width="labelWidth"
-    class="v-filter"
-  >
-    <el-row :gutter="20">
-      <el-col
-        :span="span"
-        v-for="(item) in list"
-        :key="item.prop"
+  <div class="v-filter">
+    <el-card>
+      <el-form
+        ref="filterForm"
+        :model="form"
+        :label-width="labelWidth"
       >
-        <el-form-item
-          :label="item.label"
-          :label-width="item.labelWidth || labelWidth"
-        >
+        <el-row :gutter="20">
+          <el-col
+            :span="span"
+            v-for="(item) in list"
+            :key="item.prop"
+          >
+            <el-form-item
+              :label="item.label"
+              :label-width="item.labelWidth || labelWidth"
+            >
 
-          <el-input v-if="item.scope === 'input'" v-model.trim="form[item.prop]"
-                    :placeholder="item.placeholder || '请输入'" />
-          <el-select
-            v-if="item.scope === 'select'"
-            v-model="form[item.prop]"
-            :placeholder="item.placeholder || '请选择'"
-            clearable
-            filterable
-            v-bind="{
+              <el-input v-if="item.scope === 'input'" v-model.trim="form[item.prop]"
+                        :placeholder="item.placeholder || '请输入'" />
+              <el-select
+                v-if="item.scope === 'select'"
+                v-model="form[item.prop]"
+                :placeholder="item.placeholder || '请选择'"
+                clearable
+                filterable
+                v-bind="{
             ...item
           }"
-            @change="function (val) {
+                @change="function (val) {
             if(item.onchange) {
               item.onchange(val)
             }
           }"
-          >
-            <el-option
-              v-for="option in (item.options || [])"
-              :key="option.value"
-              :label="option.label"
-              :value="option.value"
-            />
-          </el-select>
-          <el-date-picker
-            v-if="datepicker.includes(item.scope)"
-            v-model="form[item.prop]"
-            :value-format="item.format || 'YYYY-MM-DD HH:mm:ss'"
-            :type="item.scope"
-            :placeholder="item.placeholder || '请选择'"
-            start-placeholder="开始"
-            end-placeholder="结束"
+              >
+                <el-option
+                  v-for="option in (item.options || [])"
+                  :key="option.value"
+                  :label="option.label"
+                  :value="option.value"
+                />
+              </el-select>
+              <el-date-picker
+                v-if="datepicker.includes(item.scope)"
+                v-model="form[item.prop]"
+                :value-format="item.format || 'YYYY-MM-DD HH:mm:ss'"
+                :type="item.scope"
+                :placeholder="item.placeholder || '请选择'"
+                start-placeholder="开始"
+                end-placeholder="结束"
 
-            clearable
-            @change="(e) => dateChange(e, item)"
-          />
-          <el-row v-if="item.scope === 'range'" type="flex" align="middle">
-            <el-col :span="11">
-              <el-input v-model="form[item.startKey]" :placeholder="item.placeholder || '请输入'"
-                        style="width: 100%;" />
-            </el-col>
-            <el-col class="line" :span="2">-</el-col>
-            <el-col :span="11">
-              <el-input v-model="form[item.endKey]" :placeholder="item.placeholder || '请输入'" style="width: 100%;" />
-            </el-col>
-          </el-row>
-          <el-cascader
-            v-if="item.scope === 'cascader'"
-            v-model="form[item.prop]"
-            :options="item.options"
-            :props="item.cascaderProps || { checkStrictly: true, emitPath: false }"
-            :collapse-tags="item.collapseTags"
-            clearable
+                clearable
+                @change="(e) => dateChange(e, item)"
+              />
+              <el-row v-if="item.scope === 'range'" type="flex" align="middle">
+                <el-col :span="11">
+                  <el-input v-model="form[item.startKey]" :placeholder="item.placeholder || '请输入'"
+                            style="width: 100%;" />
+                </el-col>
+                <el-col class="line" :span="2">-</el-col>
+                <el-col :span="11">
+                  <el-input v-model="form[item.endKey]" :placeholder="item.placeholder || '请输入'" style="width: 100%;" />
+                </el-col>
+              </el-row>
+              <el-cascader
+                v-if="item.scope === 'cascader'"
+                v-model="form[item.prop]"
+                :options="item.options"
+                :props="item.cascaderProps || { checkStrictly: true, emitPath: false }"
+                :collapse-tags="item.collapseTags"
+                clearable
 
-          />
-        </el-form-item>
-      </el-col>
+              />
+            </el-form-item>
+          </el-col>
 
-      <el-col :span="span">
-        <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
-        <el-button :icon="Refresh" @click="reset">重置</el-button>
-        <el-button v-for="item in btns" :key="item.text" @click="item.click">{{ item.text }}</el-button>
-      </el-col>
-    </el-row>
-  </el-form>
+          <el-col :span="span">
+            <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
+            <el-button :icon="Refresh" @click="reset">重置</el-button>
+            <el-button v-for="item in btns" :key="item.text" @click="item.click">{{ item.text }}</el-button>
+          </el-col>
+        </el-row>
+      </el-form>
+    </el-card>
+  </div>
 </template>
 
 <script setup>
@@ -100,7 +103,8 @@ import {
   ElRow,
   ElCol,
   ElCascader,
-  ElButton
+  ElButton,
+  ElCard,
 } from 'element-plus'
 import {
   Search,

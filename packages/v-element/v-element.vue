@@ -8,9 +8,10 @@
   <div v-if="col.scope === 'render' && col.render">{{ col.render(row, col.prop) }}</div>
 
   <el-input
-    v-if="col.scope === 'input'"
+    v-if="['textarea', 'input'].includes(col.scope)"
+    :type="col.scope || 'text'"
     v-bind="{
-      ...col
+      ..._.omit(col, ['label'])
     }"
     v-model="value"
     @change="change"
@@ -19,7 +20,7 @@
   <el-input-number
     v-if="col.scope === 'input-number'"
     v-bind="{
-      ...col
+      ..._.omit(col, ['label'])
     }"
     v-model="value"
     @change="change"

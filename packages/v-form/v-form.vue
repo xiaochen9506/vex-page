@@ -8,7 +8,7 @@
     v-bind="$attrs"
   >
     <el-row :gutter="20">
-      <el-col :span="24 / col" v-for="item in list" :key="item.prop">
+      <el-col :span="item.colSpan || 24 / col" v-for="item in list" :key="item.prop">
         <el-form-item
           :label="item.label"
           :prop="item.prop"
