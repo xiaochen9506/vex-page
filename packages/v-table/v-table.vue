@@ -49,8 +49,8 @@
             >
             <template v-for="btn in item.options || []" :key="btn.event">
               <el-button
-                v-if="!btn.if || (typeof btn.if === 'function' ? btn.if(row, $index) : row[btn.if])"
-                text
+                v-if="showBtn(btn, row, $index)"
+                link
                 class="v-table-btn"
                 :type="btn.type || 'primary'"
                 @click="btnClick(btn, row, $index)"
@@ -196,6 +196,21 @@ const btnClick = (btn, row, index) => {
     row,
     index,
   })
+}
+
+const showBtn = (btn, row, index) => {
+  if ('if' in btn) {
+    if (typeof btn.if === 'function') {
+      return btn.if(row, index)
+    }
+    return row[btn.if]
+  }
+
+  if (btn.render) {
+    return !!btn.render(row, index)
+  }
+
+  return !!btn.label
 }
 
 defineExpose({
