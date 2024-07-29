@@ -28,6 +28,7 @@
                 v-bind="{
             ...item
           }"
+                :filter-method="(query) => item.remoteMethod(query, item)"
                 @change="function (val) {
             if(item.onchange) {
               item.onchange(val)
