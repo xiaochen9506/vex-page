@@ -2,9 +2,8 @@
   <div class="v-page" :class="{ pd: props.table && props.table.onAdd }">
     <VFilter
       v-if="showFilter"
-      ref="filter"
+      ref="filterRef"
       :filter="filter"
-      :filter-config="filterConfig"
       :label-width="filterLabelWidth"
       :btns="filterBtns"
       :col="col"
@@ -147,11 +146,6 @@ const props = defineProps({
     type: Array,
     default: () => ([])
   },
-  // 筛选有些配置是通过接口获取，需要
-  filterConfig: {
-    type: Object,
-    default: () => ({})
-  },
   /**
    * @name filterLabelWidth
    * @vue Prop
@@ -218,11 +212,11 @@ const col = ref(4)
 const tableRef = ref(null)
 
 const clearRadio = () => {
-  tableRef.value.clearRadio()
+  tableRef.value?.clearRadio()
 }
 
 const clearSelection = () => {
-  tableRef.value.clearSelection()
+  tableRef.value?.clearSelection()
 }
 
 const btnClick = ({ btn, row, index }) => {
@@ -280,15 +274,22 @@ const handleSearch = (modal) => {
   proxy.$emit('search', modal)
 }
 
+const search = () => {
+  filterRef.value.search()
+}
+
 defineExpose({
   refreshList,
   clearSelection,
   clearRadio,
+  search,
 })
+
+const filterRef = ref()
 
 onMounted(() => {
   if (props.init) {
-    fetchList()
+    filterRef.value.search()
   }
 })
 </script>

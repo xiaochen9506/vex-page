@@ -77,9 +77,15 @@
           </el-col>
 
           <el-col :span="span">
-            <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
-            <el-button :icon="Refresh" @click="reset">重置</el-button>
-            <el-button v-for="item in btns" :key="item.text" @click="item.click">{{ item.text }}</el-button>
+            <el-form-item
+              :label="list.length >= col ? ' ' : ''"
+              :label-width="labelWidth"
+            >
+              <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
+              <el-button :icon="Refresh" @click="reset">重置</el-button>
+              <el-button v-for="item in btns" :key="item.text" @click="item.click">{{ item.text }}</el-button>
+            </el-form-item>
+
           </el-col>
         </el-row>
       </el-form>
@@ -93,7 +99,7 @@
  * @vue Component
  * @description v-page的筛选组件
  */
-import { defineProps, ref, watch, onMounted, getCurrentInstance, computed } from 'vue'
+import { defineProps, ref, watch, onMounted, getCurrentInstance, computed, defineExpose } from 'vue'
 import {
   ElForm,
   ElFormItem,
@@ -141,11 +147,11 @@ const props = defineProps({
    * @name labelWidth
    * @vue Prop
    * @description label宽度
-   * @type ["String"]
+   * @type ["String", "Number"]
    * @default 110px
    */
   labelWidth: {
-    type: String,
+    type: [String, Number],
     default: '110px'
   },
   /**
@@ -158,11 +164,6 @@ const props = defineProps({
   col: {
     type: Number,
     default: 4
-  },
-  // 筛选有些配置是通过接口获取，需要
-  filterConfig: {
-    type: Object,
-    default: () => ({})
   },
 })
 
@@ -178,15 +179,16 @@ watch(() => props.filter, (val) => {
   initFilter(val)
 }, { deep: true })
 
-watch(() => props.filterConfig, () => {
-  initFilter(props.filter)
-}, { deep: true })
-
 const initFilter = (val = []) => {
-  list.value = val.map(item => ({
-    ...item,
-    ...(props.filterConfig[item.prop] || {})
-  }))
+  list.value = val.map(item => {
+    if (item.initValue || item.initValue === 0) {
+      form.value[item.prop] = item.initValue
+    }
+
+    return {
+      ...item,
+    }
+  })
 }
 
 const clear = () => {
@@ -229,6 +231,10 @@ const reset = () => {
 
 onMounted(() => {
   initFilter(props.filter)
+})
+
+defineExpose({
+  search,
 })
 </script>
 
