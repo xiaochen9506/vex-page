@@ -223,7 +223,7 @@ const btnClick = ({ btn, row, index }) => {
   proxy.$emit(btn.event, row, index)
 }
 
-const fetchList = async (query) => {
+const fetchList = async (query = {}) => {
   if (!props.getList) return
   const loading = ElLoading.service({
     target: '.v-page-table'
@@ -289,7 +289,11 @@ const filterRef = ref()
 
 onMounted(() => {
   if (props.init) {
-    filterRef.value.search()
+    if (props.showFilter) {
+      filterRef.value.search()
+    } else {
+      fetchList()
+    }
   }
 })
 </script>
