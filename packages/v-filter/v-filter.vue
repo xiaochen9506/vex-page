@@ -77,12 +77,9 @@
           </el-col>
 
           <el-col :span="span">
-            <el-form-item
-            >
               <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
               <el-button :icon="Refresh" @click="reset">重置</el-button>
               <el-button v-for="item in btns" :key="item.text" @click="item.click">{{ item.text }}</el-button>
-            </el-form-item>
 
           </el-col>
         </el-row>
