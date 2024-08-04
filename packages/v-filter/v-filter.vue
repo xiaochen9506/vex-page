@@ -28,7 +28,7 @@
                 v-bind="{
             ...item
           }"
-                :filter-method="(query) => item.remoteMethod(query, item)"
+                :filter-method="(query) => item.remoteMethod?.(query, item)"
                 @change="function (val) {
             if(item.onchange) {
               item.onchange(val)
@@ -78,8 +78,6 @@
 
           <el-col :span="span">
             <el-form-item
-              :label="list.length >= col ? ' ' : ''"
-              :label-width="labelWidth"
             >
               <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
               <el-button :icon="Refresh" @click="reset">重置</el-button>
