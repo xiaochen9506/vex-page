@@ -46,7 +46,7 @@
     v-if="col.scope === 'tag'"
     :type="getTag(row[col.prop], col.options).type"
   >
-    {{ getTag(row[col.prop], col.options).label }}
+    {{ getTagLabel(row[col.prop], col.options) }}
   </el-tag>
 
   <el-image
@@ -136,5 +136,10 @@ const change = () => {
 const getTag = (value, list) => {
   const item = list.find(i => i.value === value) || {}
   return item
+}
+
+const getTagLabel = (value, list) => {
+  const item = getTag(value, list)
+  return item?.label || value
 }
 </script>
