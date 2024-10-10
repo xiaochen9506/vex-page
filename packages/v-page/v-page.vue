@@ -228,24 +228,27 @@ const fetchList = async (query = {}) => {
   const loading = ElLoading.service({
     target: '.v-page-table'
   })
-  params.value = {
-    [PAGE_NUM_KEY]: pagination.value.pageNum || 1,
-    [PAGE_SIZE_KEY]: pagination.value.pageSize || 10,
-    ...query,
-  }
-  // 默认第一页
-  const res = await props.getList(params.value)
-  let data = GET_LIST(res)
-  if (props.formatList) {
-    data = props.formatList(data)
-  }
+  try {
+    params.value = {
+      [PAGE_NUM_KEY]: pagination.value.pageNum || 1,
+      [PAGE_SIZE_KEY]: pagination.value.pageSize || 10,
+      ...query,
+    }
+    // 默认第一页
+    const res = await props.getList(params.value)
+    let data = GET_LIST(res)
+    if (props.formatList) {
+      data = props.formatList(data)
+    }
 
-  list.value = data.map((item, index) => ({
-    ...item,
-    index: index + 1 + (params.value[PAGE_NUM_KEY] - 1) * params.value[PAGE_SIZE_KEY]
-  }))
-  total.value = GET_TOTAL(res)
-  loading.close()
+    list.value = data.map((item, index) => ({
+      ...item,
+      index: index + 1 + (params.value[PAGE_NUM_KEY] - 1) * params.value[PAGE_SIZE_KEY]
+    }))
+    total.value = GET_TOTAL(res)
+  } finally {
+    loading.close()
+  }
 }
 
 const handlePagination = (p) => {

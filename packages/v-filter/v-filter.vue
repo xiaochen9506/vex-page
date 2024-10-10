@@ -2,9 +2,10 @@
   <div class="v-filter">
     <el-card>
       <el-form
-        ref="filterForm"
+        ref="filterFormRef"
         :model="form"
         :label-width="labelWidth"
+        :rules="rules"
       >
         <el-row :gutter="20">
           <el-col
@@ -15,6 +16,7 @@
             <el-form-item
               :label="item.label"
               :label-width="item.labelWidth || labelWidth"
+              :prop="item.prop"
             >
 
               <el-input v-if="item.scope === 'input'" v-model.trim="form[item.prop]"
@@ -162,6 +164,20 @@ const props = defineProps({
   },
 })
 
+const rules = computed(() => {
+  const required = props.filter.filter(item => item.required)
+  const obj = {}
+  required.forEach(item => {
+    obj[item.prop] = [
+      { required: true, message: item.message || `${item.label}不能为空` }
+    ]
+  })
+
+  return obj
+})
+
+const filterFormRef = ref()
+
 const form = ref({})
 const list = ref([])
 const datepicker = ref(['date', 'daterange', 'month', 'year', 'monthrange'])
@@ -202,21 +218,30 @@ const dateChange = (e, item) => {
 }
 
 const search = () => {
-  const params = {}
-  list.value.forEach(item => {
-    const key = item.filterProp || item.prop
-    if (item.startKey) {
-      params[item.startKey] = form.value[item.startKey]
-      params[item.endKey] = form.value[item.endKey]
-    } else {
-      params[key] = form.value[item.prop]
-    }
+  return new Promise((resolve, reject) => {
+    filterFormRef.value.validate(valid => {
+      if (valid) {
+        const params = {}
+        list.value.forEach(item => {
+          const key = item.filterProp || item.prop
+          if (item.startKey) {
+            params[item.startKey] = form.value[item.startKey]
+            params[item.endKey] = form.value[item.endKey]
+          } else {
+            params[key] = form.value[item.prop]
+          }
 
-    if (item.format && typeof item.format === 'function') {
-      params[key] = item.format(form.value[item.prop])
-    }
+          if (item.format && typeof item.format === 'function') {
+            params[key] = item.format(form.value[item.prop])
+          }
+        })
+        proxy.$emit('search', params)
+        resolve()
+      } else {
+        reject()
+      }
+    })
   })
-  proxy.$emit('search', params)
 }
 
 const reset = () => {
