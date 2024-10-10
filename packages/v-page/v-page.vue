@@ -6,7 +6,7 @@
       :filter="filter"
       :label-width="filterLabelWidth"
       :btns="filterBtns"
-      :col="col"
+      :col="filterCol"
       @search="handleSearch"
       @reset="() => handleSearch({})"
     />
@@ -156,6 +156,16 @@ const props = defineProps({
     type: String
   },
   /**
+   * @name filterCol
+   * @vue Prop
+   * @description 筛选列数
+   * @type ["Number"]
+   */
+  filterCol: {
+    type: Number,
+    default: 4
+  },
+  /**
    * @name btns
    * @vue Prop
    * @description 按钮配置
@@ -208,7 +218,6 @@ const total = ref(0)
 const pagination = ref({})
 // filter相关
 const filterModel = ref({})
-const col = ref(4)
 const tableRef = ref(null)
 
 const clearRadio = () => {

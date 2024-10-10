@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/web-types",
   "framework": "vue",
-  "version": "1.1.30",
+  "version": "1.1.49",
   "name": "vex-page",
   "contributions": {
     "html": {
@@ -63,7 +63,8 @@
               "name": "labelWidth",
               "description": "label宽度",
               "type": [
-                "String"
+                "String",
+                "Number"
               ],
               "default": "110px"
             },
@@ -196,6 +197,13 @@
               "description": "筛选项宽度设置",
               "type": [
                 "String"
+              ]
+            },
+            {
+              "name": "filterCol",
+              "description": "筛选列数",
+              "type": [
+                "Number"
               ]
             },
             {
