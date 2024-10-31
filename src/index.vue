@@ -33,6 +33,7 @@ const getList = () => {
             radio: 0,
             select: 0,
             number: 5000,
+            switch:true,
             table: [
               {
                 id: 1,
@@ -41,6 +42,7 @@ const getList = () => {
                 gender: 0,
                 select: 0,
                 number: 5000,
+                switch:true,
               }
             ],
             btn: true
@@ -54,6 +56,7 @@ const getList = () => {
             radio: 1,
             select: 0,
             number: 25000,
+            switch:false,
             table: [
               {
                 id: 2,
@@ -62,6 +65,7 @@ const getList = () => {
                 gender: 1,
                 select: 0,
                 number: 25000,
+                switch:false,
               }
             ],
             btn: false
@@ -103,6 +107,7 @@ const columns = [
   { label: 'select', prop: 'select', scope: 'select', options: select },
   { label: '性别', prop: 'gender', scope: 'tag', options: gender },
   { label: 'radio', prop: 'radio', scope: 'radio', options: gender },
+  { label: 'switch', prop: 'switch', scope: 'switch' },
 
   // { label: '嵌套', prop: 'table', scope: 'table',
   //   options: [
