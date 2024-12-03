@@ -249,12 +249,17 @@ const reset = () => {
   proxy.$emit('reset')
 }
 
+const getCurrentFilter = () => {
+  return form.value
+}
+
 onMounted(() => {
   initFilter(props.filter)
 })
 
 defineExpose({
   search,
+  getCurrentFilter,
 })
 </script>
 

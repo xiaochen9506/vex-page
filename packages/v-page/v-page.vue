@@ -290,14 +290,11 @@ const search = () => {
   filterRef.value.search()
 }
 
-defineExpose({
-  refreshList,
-  clearSelection,
-  clearRadio,
-  search,
-})
-
 const filterRef = ref()
+
+const getCurrentFilter = () => {
+  return filterRef.value.getCurrentFilter()
+}
 
 onMounted(() => {
   if (props.init) {
@@ -307,6 +304,14 @@ onMounted(() => {
       fetchList()
     }
   }
+})
+
+defineExpose({
+  refreshList,
+  clearSelection,
+  clearRadio,
+  search,
+  getCurrentFilter,
 })
 </script>
 
