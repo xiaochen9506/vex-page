@@ -312,6 +312,7 @@ defineExpose({
   clearRadio,
   search,
   getCurrentFilter,
+  filterRef,
 })
 </script>
 

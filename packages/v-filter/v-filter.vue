@@ -253,13 +253,24 @@ const getCurrentFilter = () => {
   return form.value
 }
 
-onMounted(() => {
-  initFilter(props.filter)
-})
+const setCurrentFilter = (obj, action = true) => {
+  form.value = {
+    ...obj
+  }
+
+  if (action) {
+    search()
+  }
+}
 
 defineExpose({
   search,
   getCurrentFilter,
+  setCurrentFilter,
+})
+
+onMounted(() => {
+  initFilter(props.filter)
 })
 </script>
 
