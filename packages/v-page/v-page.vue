@@ -24,7 +24,7 @@
       <slot name="btn" />
     </div>
 
-    <div class="v-page-table">
+    <div v-loading="loading" class="v-page-table">
       <VTable
         ref="tableRef"
         :data="list"
@@ -54,7 +54,7 @@
  */
 import { defineProps, getCurrentInstance, ref, onMounted, defineExpose } from 'vue'
 
-import { ElButton, ElLoading } from 'element-plus'
+import { ElButton } from 'element-plus'
 
 import VFilter from '../v-filter/v-filter.vue'
 import cPagination from '../v-pagination/v-pagination.vue'
@@ -232,11 +232,11 @@ const btnClick = ({ btn, row, index }) => {
   proxy.$emit(btn.event, row, index)
 }
 
+const loading = ref(false)
+
 const fetchList = async (query = {}) => {
   if (!props.getList) return
-  const loading = ElLoading.service({
-    target: '.v-page-table'
-  })
+  loading.value = true
   try {
     params.value = {
       [PAGE_NUM_KEY]: pagination.value.pageNum || 1,
@@ -256,7 +256,7 @@ const fetchList = async (query = {}) => {
     }))
     total.value = GET_TOTAL(res)
   } finally {
-    loading.close()
+    loading.value = false
   }
 }
 
