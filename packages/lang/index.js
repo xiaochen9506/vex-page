@@ -1,6 +1,10 @@
-import { createI18n } from 'vue-i18n'
 import zh from './zh.js'
 import en from './en.js'
+
+const messages = {
+  zh,
+  en,
+}
 
 /**
  * 获取当前语言
@@ -12,17 +16,22 @@ export const getLanguage = () => {
   return language || 'zh'
 }
 
-const i18n = createI18n({
-  legacy: false,
-  locale: getLanguage(), // 默认显示语言
-  messages: {
-    zh,
-    en,
-  }
-})
-
-export const setLanguage = (language) => {
-  localStorage.setItem('language', language)
+export const $t = (key) => {
+  const language = getLanguage()
+  return messages[language]?.[key] || key
 }
-
-export default i18n
+//
+// const i18n = createI18n({
+//   legacy: false,
+//   locale: getLanguage(), // 默认显示语言
+//   messages: {
+//     zh,
+//     en,
+//   },
+// })
+//
+// export const setLanguage = (language) => {
+//   localStorage.setItem('language', language)
+// }
+//
+// export default i18n
