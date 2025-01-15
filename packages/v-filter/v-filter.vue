@@ -20,11 +20,11 @@
             >
 
               <el-input v-if="item.scope === 'input'" v-model.trim="form[item.prop]"
-                        :placeholder="item.placeholder || '请输入'" />
+                        :placeholder="item.placeholder || $t('input')" />
               <el-select
                 v-if="item.scope === 'select'"
                 v-model="form[item.prop]"
-                :placeholder="item.placeholder || '请选择'"
+                :placeholder="item.placeholder || $t('select')"
                 clearable
                 filterable
                 v-bind="{
@@ -49,21 +49,21 @@
                 v-model="form[item.prop]"
                 :value-format="item.format || 'YYYY-MM-DD HH:mm:ss'"
                 :type="item.scope"
-                :placeholder="item.placeholder || '请选择'"
-                start-placeholder="开始"
-                end-placeholder="结束"
+                :placeholder="item.placeholder || $t('select')"
+                :start-placeholder="$t('start')"
+                :end-placeholder="$t('end')"
 
                 clearable
                 @change="(e) => dateChange(e, item)"
               />
               <el-row v-if="item.scope === 'range'" type="flex" align="middle">
                 <el-col :span="11">
-                  <el-input v-model="form[item.startKey]" :placeholder="item.placeholder || '请输入'"
+                  <el-input v-model="form[item.startKey]" :placeholder="item.placeholder || $t('input')"
                             style="width: 100%;" />
                 </el-col>
                 <el-col class="line" :span="2">-</el-col>
                 <el-col :span="11">
-                  <el-input v-model="form[item.endKey]" :placeholder="item.placeholder || '请输入'" style="width: 100%;" />
+                  <el-input v-model="form[item.endKey]" :placeholder="item.placeholder || $t('input')" style="width: 100%;" />
                 </el-col>
               </el-row>
               <el-cascader
@@ -79,8 +79,8 @@
           </el-col>
 
           <el-col :span="span">
-              <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
-              <el-button :icon="Refresh" @click="reset">重置</el-button>
+              <el-button type="primary" :icon="Search" @click="search">{{ $t('search') }}</el-button>
+              <el-button :icon="Refresh" @click="reset">{{ $t('reset') }}</el-button>
               <el-button v-for="item in btns" :key="item.text" @click="item.click">{{ item.text }}</el-button>
 
           </el-col>

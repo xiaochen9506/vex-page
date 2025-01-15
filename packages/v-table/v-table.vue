@@ -79,7 +79,6 @@
 import { ElTable, ElTableColumn, ElButton, ElRadio } from 'element-plus'
 import { defineProps, ref, onMounted, nextTick, onUnmounted, defineExpose, getCurrentInstance } from 'vue'
 import VElement from '../v-element/v-element.vue'
-import { copy } from '../utils/index'
 
 const props = defineProps({
   /**
