@@ -114,6 +114,7 @@ import {
   Search,
   Refresh
 } from '@element-plus/icons-vue'
+import { $t } from '../lang/index'
 
 const { proxy } = getCurrentInstance()
 
