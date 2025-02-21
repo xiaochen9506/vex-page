@@ -1775,7 +1775,7 @@ const Fn = {
         ]),
         _: 1
       }, 16, ["modelValue"])) : O("", !0),
-      e.col.scope === "tag" ? (v(), S(c(Xn), {
+      e.col.scope === "tag" && u(e.row[e.col.prop], e.col.options) ? (v(), S(c(Xn), {
         key: 6,
         type: l(e.row[e.col.prop], e.col.options).type
       }, {

@@ -43,7 +43,7 @@
   </el-select>
 
   <el-tag
-    v-if="col.scope === 'tag'"
+    v-if="col.scope === 'tag' && getTagLabel(row[col.prop], col.options)"
     :type="getTag(row[col.prop], col.options).type"
   >
     {{ getTagLabel(row[col.prop], col.options) }}
