@@ -15,8 +15,9 @@
         />
         <slot :name="item.prop"></slot>
       </el-descriptions-item>
-
     </el-descriptions>
+
+    <slot />
 
     <template #footer>
       <div class="dialog-footer">
