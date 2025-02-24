@@ -1,11 +1,39 @@
 {
   "$schema": "http://json.schemastore.org/web-types",
   "framework": "vue",
-  "version": "1.1.58",
+  "version": "1.1.61",
   "name": "vex-page",
   "contributions": {
     "html": {
       "vue-components": [
+        {
+          "name": "v-detail",
+          "description": "基于el-dialog + el-descritions + v-element组件",
+          "props": [
+            {
+              "name": "data",
+              "description": "详情数据",
+              "type": [
+                "Object"
+              ],
+              "default": "{}"
+            },
+            {
+              "name": "columns",
+              "description": "配置",
+              "type": [
+                "Array"
+              ],
+              "default": "[]"
+            }
+          ],
+          "js": {
+            "events": []
+          },
+          "source": {
+            "symbol": "VDetail"
+          }
+        },
         {
           "name": "v-element",
           "description": "基于element-plus, 通过scope显示具体组件，用于v-table和v-form等",

@@ -2391,7 +2391,7 @@ const Fn = {
 };
 function $u(e) {
   const t = U(), n = S(e.modelValue);
-  return he(() => e.value, (o) => {
+  return he(() => e.modelValue, (o) => {
     n.value = o;
   }), {
     dialogVisible: n,
@@ -2410,10 +2410,24 @@ const Cu = { class: "dialog-footer" }, xu = {
       type: Boolean,
       default: !1
     },
+    /**
+     * @name data
+     * @vue Prop
+     * @description 详情数据
+     * @type ["Object"]
+     * @default {}
+     */
     data: {
       type: Object,
       default: () => ({})
     },
+    /**
+     * @name columns
+     * @vue Prop
+     * @description 配置
+     * @type ["Array"]
+     * @default []
+     */
     columns: {
       type: Array,
       default: () => []

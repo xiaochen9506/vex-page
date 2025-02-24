@@ -6,7 +6,7 @@ export default function useDialog(props) {
   const dialogVisible = ref(props.modelValue)
 
 
-  watch(() => props.value, (v) => {
+  watch(() => props.modelValue, (v) => {
     dialogVisible.value = v
   })
 
