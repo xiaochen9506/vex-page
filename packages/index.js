@@ -6,6 +6,7 @@ import VTable from './v-table/v-table.vue'
 import VElement from './v-element/v-element.vue'
 import VPagination from './v-pagination/v-pagination.vue'
 import VForm from './v-form/v-form.vue'
+import VDetail from './v-detail/index.vue'
 
 export {
   VTable,
@@ -13,6 +14,7 @@ export {
   VElement,
   VPagination,
   VForm,
+  VDetail,
   setConfig
 }
 
@@ -27,5 +29,6 @@ export default {
     app.component('VElement', VElement)
     app.component('VPagination', VPagination)
     app.component('VForm', VForm)
+    app.component('VDetail', VDetail)
   }
 }
