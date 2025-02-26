@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/web-types",
   "framework": "vue",
-  "version": "1.1.62",
+  "version": "1.1.63",
   "name": "vex-page",
   "contributions": {
     "html": {
@@ -25,6 +25,30 @@
                 "Array"
               ],
               "default": "[]"
+            },
+            {
+              "name": "title",
+              "description": "标题",
+              "type": [
+                "String"
+              ],
+              "default": "'详情'"
+            },
+            {
+              "name": "dialogProps",
+              "description": "dialog属性",
+              "type": [
+                "Object"
+              ],
+              "default": "{}"
+            },
+            {
+              "name": "descProps",
+              "description": "el-descriptions属性",
+              "type": [
+                "Object"
+              ],
+              "default": "{}"
             }
           ],
           "js": {

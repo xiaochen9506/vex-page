@@ -47,6 +47,10 @@ export default defineConfig({
     VueSetupExtend(),
   ],
 
+  esbuild: {
+    pure: ['console.log'], // 删除 console.log
+  },
+
   build: {
     outDir: 'lib', //输出文件名称
     lib: {

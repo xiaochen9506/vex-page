@@ -1,13 +1,13 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="详情"
-    width="700"
+    :title="title"
     :close-on-click-modal="false"
     :before-close="beforeClose"
+    v-bind="dialogProps"
   >
 
-    <el-descriptions>
+    <el-descriptions v-bind="descProps">
       <el-descriptions-item v-for="item in columns" :label="item.label" :span="item.span" :key="item.prop">
         <VElement
           :row="data"
@@ -65,7 +65,44 @@ const props = defineProps({
   columns: {
     type: Array,
     default: () => ([]),
-  }
+  },
+  /**
+   * @name title
+   * @vue Prop
+   * @description 标题
+   * @type ["String"]
+   * @default '详情'
+   */
+  title: {
+    type: String,
+    default: '详情'
+  },
+  /**
+   * @name dialogProps
+   * @vue Prop
+   * @description dialog属性
+   * @type ["Object"]
+   * @default {}
+   */
+  dialogProps: {
+    type: Object,
+    default: () => ({
+      width: '1000'
+    })
+  },
+  /**
+   * @name descProps
+   * @vue Prop
+   * @description el-descriptions属性
+   * @type ["Object"]
+   * @default {}
+   */
+  descProps: {
+    type: Object,
+    default: () => ({
+      border: true,
+    })
+  },
 })
 
 
