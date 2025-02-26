@@ -1,11 +1,11 @@
 import { ElMessage } from 'element-plus'
 
 // 拷贝
-export const copy = (text) => {
+export const copy = (text, tips = '拷贝成功') => {
   if (navigator.clipboard) {
     // clipboard api 复制
     navigator.clipboard.writeText(text);
-    ElMessage.success('拷贝成功')
+    ElMessage.success(tips)
   } else {
     const textarea = document.createElement('textarea');
     document.body.appendChild(textarea);
@@ -21,6 +21,6 @@ export const copy = (text) => {
     document.execCommand('copy', true);
     // 移除输入框
     document.body.removeChild(textarea);
-    ElMessage.success('拷贝成功')
+    ElMessage.success(tips)
   }
 }

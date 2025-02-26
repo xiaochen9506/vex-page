@@ -8,6 +8,10 @@ import VPagination from './v-pagination/v-pagination.vue'
 import VForm from './v-form/v-form.vue'
 import VDetail from './v-detail/index.vue'
 
+import * as utils from './utils';
+
+export { utils };
+
 export {
   VTable,
   VFilter,
@@ -32,3 +36,4 @@ export default {
     app.component('VDetail', VDetail)
   }
 }
+
