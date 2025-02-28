@@ -7,7 +7,7 @@
     v-bind="dialogProps"
   >
 
-    <el-descriptions v-bind="descProps">
+    <el-descriptions class="v-detail" v-bind="descProps">
       <el-descriptions-item v-for="item in columns" :label="item.label" :span="item.span" :key="item.prop">
         <VElement
           :row="data"
@@ -108,3 +108,27 @@ const props = defineProps({
 
 const { dialogVisible, closeDialog, beforeClose } = dialog(props)
 </script>
+
+<style lang="scss">
+.v-detail {
+  .el-descriptions__table,.is-bordered {
+    // 将表格的 table-layout 设置为 fixed，这样单元格的宽度将基于显式的宽度设置，而不是内容
+    table-layout: fixed;
+  }
+
+  .el-descriptions__body .el-descriptions__table .el-descriptions__cell {
+    // 内容换行，而不是溢出
+    word-break: break-all;
+  }
+
+  .el-descriptions__label.el-descriptions__cell.is-bordered-label {
+    width: 200px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .el-descriptions__label.el-descriptions__cell.is-bordered-label {
+      width: 100px;
+    }
+  }
+}
+</style>
