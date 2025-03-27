@@ -35,7 +35,7 @@
     @change="change"
   >
     <el-option
-      v-for="item in col.options"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value"
@@ -43,10 +43,10 @@
   </el-select>
 
   <el-tag
-    v-if="col.scope === 'tag' && getTagLabel(row[col.prop], col.options)"
-    :type="getTag(row[col.prop], col.options).type"
+    v-if="col.scope === 'tag' && getTagLabel(row[col.prop], options)"
+    :type="getTag(row[col.prop], options).type"
   >
-    {{ getTagLabel(row[col.prop], col.options) }}
+    {{ getTagLabel(row[col.prop], options) }}
   </el-tag>
 
   <el-image
@@ -73,7 +73,7 @@
   </el-switch>
 
   <el-radio-group v-if="col.scope === 'radio'" v-model="value" @change="change">
-    <el-radio v-for="item in col.options" :label="item.value" :key="item.label">{{ item.label }}</el-radio>
+    <el-radio v-for="item in options" :label="item.value" :key="item.label">{{ item.label }}</el-radio>
   </el-radio-group>
 </template>
 
@@ -95,7 +95,7 @@ import {
   ElImage,
   ElSwitch
 } from 'element-plus'
-import { defineProps, ref, watch } from 'vue'
+import { defineProps, ref, watch, computed } from 'vue'
 import * as _ from 'lodash-es'
 
 const props = defineProps({
@@ -137,6 +137,10 @@ const value = ref(_.get(props.row, props.col.prop))
 
 watch(() => _.get(props.row, props.col.prop), (val) => {
   value.value = val
+})
+
+const options = computed(() => {
+  return props.col.options || []
 })
 
 const change = () => {
