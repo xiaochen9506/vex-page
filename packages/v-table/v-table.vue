@@ -33,7 +33,6 @@
             v-if="!['btn', 'table'].includes(item.scope)"
             :row="row"
             :col="item"
-            :options="item.options || []"
           />
 
           <v-table
