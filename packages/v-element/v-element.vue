@@ -121,12 +121,11 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
-  options: {
-    type: Array,
-    default: () => ([])
-  }
 })
 
+const options = computed(() => {
+  return col.options || []
+})
 
 const emits = defineEmits([
   /**
