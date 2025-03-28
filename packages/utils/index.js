@@ -24,3 +24,14 @@ export const copy = (text, tips = '拷贝成功') => {
     ElMessage.success(tips)
   }
 }
+
+// random str with length
+export const randomStr = (length = 32) => {
+  const chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+  const maxPos = chars.length;
+  let str = '';
+  for (let i = 0; i < length; i++) {
+    str += chars.charAt(Math.floor(Math.random() * maxPos));
+  }
+  return str;
+}

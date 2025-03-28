@@ -120,6 +120,10 @@ const props = defineProps({
   col: {
     type: Object,
     default: () => ({})
+  },
+  options: {
+    type: Array,
+    default: () => ([])
   }
 })
 
@@ -137,10 +141,6 @@ const value = ref(_.get(props.row, props.col.prop))
 
 watch(() => _.get(props.row, props.col.prop), (val) => {
   value.value = val
-})
-
-const options = computed(() => {
-  return props.col.options || []
 })
 
 const change = () => {

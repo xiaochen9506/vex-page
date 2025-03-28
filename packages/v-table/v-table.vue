@@ -3,13 +3,12 @@
     <el-table
       ref="tableRef"
       border
-      v-bind="{
-        ...tableProps
-      }"
+      v-bind="tableProps"
       :data="data"
-      @selection-change="selection"
+      :key="tableKey"
       :highlight-current-row="!!radio"
       @current-change="radioChange"
+      @selection-change="selection"
     >
       <el-table-column v-if="selection" type="selection" width="40" />
 
@@ -27,15 +26,14 @@
         v-for="item in columns"
         :key="item.prop"
         :width="item.width"
-        v-bind="{
-          ...item
-        }"
+        v-bind="item"
       >
         <template #default="{ row, $index }">
           <VElement
             v-if="!['btn', 'table'].includes(item.scope)"
             :row="row"
             :col="item"
+            :options="item.options || []"
           />
 
           <v-table
@@ -77,8 +75,9 @@
  * @description 基于el-table + v-element的表格组件
  */
 import { ElTable, ElTableColumn, ElButton, ElRadio } from 'element-plus'
-import { defineProps, ref, onMounted, nextTick, onUnmounted, defineExpose, getCurrentInstance } from 'vue'
+import { defineProps, ref, onMounted, nextTick, onUnmounted, defineExpose, getCurrentInstance, computed, watch } from 'vue'
 import VElement from '../v-element/v-element.vue'
+import { randomStr } from '../utils'
 
 const props = defineProps({
   /**
@@ -164,6 +163,11 @@ const { proxy } = getCurrentInstance()
 const radioValue = ref(null)
 const autoMaxHeight = ref(null)
 const tableRef = ref(null)
+const tableKey = ref(randomStr())
+
+watch(() => props.columns, (v) => {
+  tableKey.value = randomStr()
+}, { deep: true, immediate: true })
 
 const setTableHeight = () => {
   const table = document.querySelector('.table-container .c-table')
