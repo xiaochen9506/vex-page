@@ -30,7 +30,7 @@
       >
         <template #default="{ row, $index }">
           <VElement
-            v-if="!['btn', 'table'].includes(item.scope)"
+            v-if="!['btn', 'table', 'slot'].includes(item.scope)"
             :row="row"
             :col="item"
           />
@@ -41,9 +41,7 @@
             :columns="item.options"
           />
 
-          <template
-            v-if="item.scope === 'btn'"
-            >
+          <template v-if="item.scope === 'btn'">
             <template v-for="btn in item.options || []" :key="btn.event">
               <el-button
                 v-if="showBtn(btn, row, $index)"
@@ -60,6 +58,8 @@
             </template>
 
           </template>
+
+          <slot :name="item.prop" v-bind="{ row }"></slot>
         </template>
       </el-table-column>
     </el-table>

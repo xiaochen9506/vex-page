@@ -11,7 +11,11 @@
       stripe: true,
     }"
     @test="test"
-  />
+  >
+    <template #slotName="{ row }">
+      <div>{{ row.slotName }}</div>
+    </template>
+  </v-page>
 </template>
 
 <script setup>
@@ -45,6 +49,7 @@ const getList = () => {
                 switch:true,
               }
             ],
+            slotName: 'slotName',
             btn: true
           },
           {
@@ -68,6 +73,7 @@ const getList = () => {
                 switch:false,
               }
             ],
+            slotName: 'slotName2',
             btn: false
           },
         ],
@@ -109,17 +115,7 @@ const columns = [
   { label: 'radio', prop: 'radio', scope: 'radio', options: gender },
   { label: 'switch', prop: 'switch', scope: 'switch' },
 
-  // { label: '嵌套', prop: 'table', scope: 'table',
-  //   options: [
-  //     { label: '姓名', prop: 'name', },
-  //     { label: 'number', prop: 'number', scope: 'number-col' },
-  //     { label: 'input', prop: 'age', scope: 'input', change },
-  //     { label: 'select', prop: 'select', scope: 'select', options: select },
-  //     { label: '性别', prop: 'gender', scope: 'tag', options: gender },
-  //   ]
-  // },
-
-  // 操作列
+  { label: 'slot', prop: 'slotName', scope: 'slot', },
   {
     label: '操作',
     fixed: 'right',

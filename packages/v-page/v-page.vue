@@ -35,7 +35,11 @@
           ...props.table,
         }"
         @btnClick="btnClick"
-      />
+      >
+        <template v-for="item in columns" #[item.prop]="data">
+          <slot :name="item.prop" v-bind="data"></slot>
+        </template>
+      </VTable>
     </div>
     <c-pagination
       v-if="showPagination"
