@@ -44,6 +44,7 @@
     <c-pagination
       v-if="showPagination"
       :page="pagination.pageNum"
+      :page-size="pagination.pageSize"
       :total="total"
       @pagination="handlePagination"
     />
@@ -65,7 +66,7 @@ import cPagination from '../v-pagination/v-pagination.vue'
 import VTable from '../v-table/v-table.vue'
 import { useConfig } from '../config'
 
-const { GET_LIST, GET_TOTAL, PAGE_NUM_KEY, PAGE_SIZE_KEY } = useConfig()
+const { GET_LIST, GET_TOTAL, PAGE_NUM_KEY, PAGE_SIZE_KEY, PAGE_SIZE = 10 } = useConfig()
 
 const { proxy } = getCurrentInstance()
 
@@ -219,7 +220,10 @@ const props = defineProps({
 const list = ref([])
 const params = ref({})
 const total = ref(0)
-const pagination = ref({})
+const pagination = ref({
+  pageSize: PAGE_SIZE,
+  pageNum: 1,
+})
 // filter相关
 const filterModel = ref({})
 const tableRef = ref(null)
@@ -244,7 +248,7 @@ const fetchList = async (query = {}) => {
   try {
     params.value = {
       [PAGE_NUM_KEY]: pagination.value.pageNum || 1,
-      [PAGE_SIZE_KEY]: pagination.value.pageSize || 10,
+      [PAGE_SIZE_KEY]: pagination.value.pageSize || PAGE_SIZE,
       ...query,
     }
     // 默认第一页

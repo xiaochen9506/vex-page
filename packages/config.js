@@ -21,9 +21,10 @@ export function setConfig(config, app) {
 // 获取配置
 export function useConfig() {
   return inject('vxe-page', {
+    PAGE_SIZE: 10,
     PAGE_SIZE_KEY,
     PAGE_NUM_KEY,
     GET_LIST,
-    GET_TOTAL
+    GET_TOTAL,
   })
 }

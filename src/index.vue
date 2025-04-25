@@ -23,7 +23,7 @@ import { ref } from 'vue'
 import avatar from './avatar.js'
 
 // 获取列表
-const getList = () => {
+const getList = (params) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({

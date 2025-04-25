@@ -3,6 +3,7 @@
     <el-pagination
       :current-page="currentPage"
       :layout="layout"
+      :page-size="pageSize"
       v-bind="$attrs"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -36,17 +37,24 @@ const props = defineProps({
   hidden: {
     type: Boolean,
     default: false
+  },
+  pageSize: {
+    type: Number,
+    default: 10
   }
 })
 
-const pageSize = ref(10)
+const pageSize = ref(props.pageSize || 10)
 const currentPage = ref(props.page || 1)
 const { proxy } = getCurrentInstance()
 
 watch(() => props.page, (v) => {
-  console.log(v)
   currentPage.value = v
-});
+})
+
+watch(() => props.pageSize, (v) => {
+  pageSize.value = v
+})
 
 const handleSizeChange = (val) => {
   console.log('size change')
