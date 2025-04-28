@@ -1,8 +1,10 @@
 import zh from './zh.js'
+import zh_CN from './zh_CN.js'
 import en from './en.js'
 
 const messages = {
   zh,
+  zh_CN,
   en,
 }
 
@@ -13,7 +15,7 @@ const messages = {
 export const getLanguage = () => {
   const language = localStorage.getItem('language')
   // 原来缓存的语言是 zh_CN重新设置下
-  return language || 'zh'
+  return language || 'zh_CN'
 }
 
 export const $t = (key) => {
