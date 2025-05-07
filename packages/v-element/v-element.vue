@@ -44,7 +44,7 @@
 
   <el-tag
     v-if="col.scope === 'tag' && getTagLabel(row[col.prop], col.options)"
-    :type="getTag(row[col.prop], col.options).type"
+    v-bind="tagOptions(row[col.prop], col.options)"
   >
     {{ getTagLabel(row[col.prop], col.options) }}
   </el-tag>
@@ -154,6 +154,17 @@ const change = () => {
 const getTag = (value, list) => {
   const item = list.find(i => i.value === value) || {}
   return item
+}
+
+const tagOptions = (value, list) => {
+  const item = getTag(value, list)
+  const obj = { ...item }
+
+  if (String(item.type).startsWith('#')) {
+    obj.color = item.type
+  }
+
+  return obj
 }
 
 const getTagLabel = (value, list) => {
