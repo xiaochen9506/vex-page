@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/web-types",
   "framework": "vue",
-  "version": "1.1.86",
+  "version": "1.1.87",
   "name": "vex-page",
   "contributions": {
     "html": {

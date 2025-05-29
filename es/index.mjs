@@ -1506,7 +1506,7 @@ const uu = function(e = {}) {
                           }, {
                             ...c
                           }, {
-                            "filter-method": (w) => {
+                            "remote-method": (w) => {
                               var j;
                               return (j = c.remoteMethod) == null ? void 0 : j.call(c, w, c);
                             },
@@ -1522,7 +1522,7 @@ const uu = function(e = {}) {
                               }, null, 8, ["label", "value"]))), 128))
                             ]),
                             _: 2
-                          }, 1040, ["modelValue", "onUpdate:modelValue", "placeholder", "filter-method", "onChange"])) : E("", !0),
+                          }, 1040, ["modelValue", "onUpdate:modelValue", "placeholder", "remote-method", "onChange"])) : E("", !0),
                           g.value.includes(c.scope) ? (y(), $(u(Xt), {
                             key: 2,
                             modelValue: l.value[c.prop],
