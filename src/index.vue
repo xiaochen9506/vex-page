@@ -132,7 +132,7 @@ const test = (row, index) => {
 }
 
 const filters = [
-  { label: '姓名', prop: 'name', scope: 'input' },
+  { label: '姓名', prop: 'name', scope: 'datetime' },
   { label: '性别', prop: 'gender', scope: 'select', options: gender, multiple: true },
 ]
 

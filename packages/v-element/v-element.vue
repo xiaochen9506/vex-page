@@ -53,6 +53,7 @@
     v-if="col.scope === 'img'"
     :src="value"
     :fit="col.fit || 'cover'"
+    v-bind="col"
   />
 
   <el-date-picker

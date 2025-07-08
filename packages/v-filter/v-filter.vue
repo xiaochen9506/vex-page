@@ -181,7 +181,7 @@ const filterFormRef = ref()
 
 const form = ref({})
 const list = ref([])
-const datepicker = ref(['date', 'daterange', 'month', 'year', 'monthrange'])
+const datepicker = ref(['date', 'daterange', 'month', 'year', 'monthrange', 'datetime', 'datetimerange'])
 
 const span = computed(() => {
   return 24 / props.col
