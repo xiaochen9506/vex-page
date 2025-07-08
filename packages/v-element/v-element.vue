@@ -53,6 +53,7 @@
     v-if="col.scope === 'img'"
     :src="value"
     :fit="col.fit || 'cover'"
+    :preview-src-list="row?.previewSrcList"
     v-bind="col"
   />
 
