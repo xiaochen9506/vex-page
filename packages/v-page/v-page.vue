@@ -68,6 +68,8 @@ import { useConfig } from '../config'
 
 const { GET_LIST, GET_TOTAL, PAGE_NUM_KEY, PAGE_SIZE_KEY, PAGE_SIZE = 10 } = useConfig()
 
+const emits = defineEmits(['search'])
+
 const { proxy } = getCurrentInstance()
 
 const props = defineProps({
@@ -291,7 +293,7 @@ const handleSearch = (modal) => {
   pagination.value.pageNum = 1
   filterModel.value = modal
   refreshList()
-  proxy.$emit('search', modal)
+  emits('search', modal)
 }
 
 const search = () => {

@@ -39,6 +39,7 @@
             v-if="item.scope === 'table'"
             :data="row[item.prop]"
             :columns="item.options"
+            @btn-click="tableBtnClick"
           />
 
           <template v-if="item.scope === 'btn'">
@@ -157,6 +158,8 @@ const props = defineProps({
   },
 })
 
+const emits = defineEmits(['btnClick'])
+
 const { proxy } = getCurrentInstance()
 
 const radioValue = ref(null)
@@ -191,9 +194,13 @@ const radioChange = (e) => {
   }
 }
 
+const tableBtnClick = params => {
+  btnClick(params.btn, params.row, params.index)
+}
+
 const btnClick = (btn, row, index) => {
   proxy.$emit(btn.event, row, index)
-  proxy.$emit('btnClick', {
+  emits('btnClick', {
     btn,
     row,
     index,

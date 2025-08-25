@@ -11,6 +11,7 @@
       stripe: true,
     }"
     @test="test"
+    @tableTest="tableTest"
   >
     <template #slotName="{ row }">
       <div>{{ row.slotName }}</div>
@@ -101,7 +102,7 @@ const change = (row, value) => {
 }
 
 const selection = (e) => {
-  console.log(e)
+  console.log('selection')
 }
 
 // 表格配置
@@ -114,6 +115,19 @@ const columns = [
   { label: '性别', prop: 'gender', scope: 'tag', options: gender },
   { label: 'radio', prop: 'radio', scope: 'radio', options: gender },
   { label: 'switch', prop: 'switch', scope: 'switch' },
+  { label: 'table', prop: 'table', scope: 'table',
+    width: 300,
+    options: [
+      { label: '姓名', prop: 'name' },
+      {
+        label: '操作',
+        scope: 'btn',
+        options: [
+          { label: 'test', event: 'tableTest' }
+        ]
+      },
+    ]
+  },
 
   { label: 'slot', prop: 'slotName', scope: 'slot', },
   {
@@ -128,6 +142,10 @@ const columns = [
 ]
 
 const test = (row, index) => {
+  console.log(row, index)
+}
+
+const tableTest = (row, index) => {
   console.log(row, index)
 }
 
